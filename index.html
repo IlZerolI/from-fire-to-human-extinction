@@ -29,7 +29,7 @@
     --ember-glow:rgba(255,121,79,0.32);
     --cyan-glow:rgba(98,238,225,0.22);
     --radius:16px;
-    --maxw:820px;
+    --maxw:1040px;
     --ease:cubic-bezier(0.25, 1, 0.5, 1);
   }
 
@@ -74,21 +74,35 @@
     border-bottom:1px solid var(--line);
     background:rgba(7,11,18,0.82);
     backdrop-filter:blur(18px) saturate(140%);
-    transition:box-shadow 0.3s;
+    transition:box-shadow 0.3s
   }
   header.scrolled{box-shadow:0 8px 36px rgba(0,0,0,0.38),0 1px 0 var(--cyan-glow)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .nav{position:relative;display:flex;align-items:center;justify-content:space-between;height:72px}
   .brand{
-    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.08rem;letter-spacing:0.01em;
-    color:var(--ink);display:flex;align-items:center;gap:10px
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.01em;
+    color:var(--ink);display:flex;align-items:center;gap:10px;text-decoration:none;white-space:nowrap
   }
-  .brand .separator{width:1px;height:14px;background:var(--line);opacity:0.6}
-  .brand .ember{color:var(--ember)}
-  .nav-links{display:none;gap:32px;list-style:none;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase}
+  .brand>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .brand-mark{flex-shrink:0}
+  .brand:hover{text-decoration:none}
+  .brand .ember{color:var(--cyan)}
+  .brand-mark{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,121,79,0.28);border-radius:50%;background:rgba(255,121,79,0.06)}
+  .brand-mark .flame{width:14px;height:20px;filter:blur(0.5px)}
+  .brand-mark .flame::after{width:8px;height:10px;top:-3px}
+  .nav>nav{margin-left:auto}
+  .nav-links{display:none;gap:30px;list-style:none;font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase}
   .nav-links a{color:var(--ink-dim)}
   .nav-links a:hover{color:var(--cyan);text-decoration:none}
-  .menu-btn{background:var(--paper);border:1px solid var(--line);color:var(--ink);padding:7px 12px;border-radius:8px;cursor:pointer;font-size:1.2rem;display:block}
+  .menu-btn{background:var(--paper);border:1px solid var(--line);color:var(--ink);padding:7px 12px;border-radius:8px;cursor:pointer;font-size:1.2rem;display:block;margin-left:12px}
   .menu-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+  .page-progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent}
+  .page-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--cyan),#8d9dff,var(--ember));box-shadow:0 0 12px var(--cyan-glow);transition:width 0.12s linear}
+  @media(max-width:859px){
+    .nav-links{position:absolute;top:calc(100% + 10px);right:0;z-index:2;min-width:220px;padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(13,20,30,0.98);box-shadow:0 20px 50px rgba(0,0,0,0.48)}
+    .nav-links.open{display:flex;flex-direction:column;gap:2px}
+    .nav-links a{display:block;padding:12px;border-radius:8px}
+    .nav-links a:hover{background:rgba(98,238,225,0.07)}
+  }
 
   /* ========== Flame motif (CSS drawn) ========== */
   .flame{
@@ -104,37 +118,87 @@
 
   /* ========== Hero ========== */
   .hero{
-    padding:128px 26px 96px;
-    text-align:center;
-    border-bottom:1px solid var(--line);
-    background:radial-gradient(ellipse at 50% 0%,rgba(98,238,225,0.08),transparent 45%),linear-gradient(180deg,rgba(13,20,30,0.9) 0%,rgba(7,11,18,0.68) 100%);
+    min-height:min(760px,calc(100svh - 72px));display:flex;align-items:center;
+    padding:88px 0 82px;text-align:left;border-bottom:1px solid var(--line);
+    background:radial-gradient(ellipse at 79% 48%,rgba(98,238,225,0.11),transparent 36%),radial-gradient(ellipse at 10% 12%,rgba(91,106,255,0.12),transparent 43%),linear-gradient(180deg,rgba(13,20,30,0.94) 0%,rgba(7,11,18,0.72) 100%);
     position:relative;overflow:hidden
   }
   .hero::after{
     content:'';position:absolute;inset:0;
-    background:radial-gradient(ellipse at 50% 35%,transparent 0%,rgba(7,11,18,0.24) 72%);
-    opacity:1;pointer-events:none
+    background:linear-gradient(90deg,rgba(7,11,18,0.12),transparent 58%),radial-gradient(ellipse at 50% 35%,transparent 0%,rgba(7,11,18,0.24) 72%);
+    pointer-events:none
   }
+  .hero-layout{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,0.92fr);align-items:center;gap:clamp(24px,5vw,68px);width:100%}
+  .hero-copy{max-width:640px}
   .kicker{
     display:inline-flex;align-items:center;gap:12px;
-    font-family:'Inter',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.4em;text-transform:uppercase;
-    color:var(--cyan);font-family:'IBM Plex Mono',monospace;
+    font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:0.67rem;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--cyan);
     border:1px solid rgba(98,238,225,0.26);
     background:rgba(98,238,225,0.06);
-    padding:9px 20px;border-radius:50px;margin-bottom:24px
+    padding:9px 14px;border-radius:50px;margin-bottom:28px
   }
   .dot{width:8px;height:8px;background:var(--cyan);border-radius:50%;box-shadow:0 0 10px rgba(98,238,225,0.75);animation:pulse 2.4s ease-in-out infinite}
   @keyframes pulse{50%{box-shadow:0 0 20px rgba(98,238,225,0.95);opacity:0.62}}
   .hero h1{
     font-family:'Space Grotesk',sans-serif;font-weight:700;
-    font-size:clamp(2.8rem,7.5vw,5.6rem);line-height:1.02;letter-spacing:-0.03em;
-    margin-bottom:24px;text-shadow:0 0 54px rgba(98,238,225,0.08)
+    font-size:clamp(3.6rem,7.3vw,6.6rem);line-height:0.98;letter-spacing:-0.065em;
+    margin-bottom:26px;text-shadow:0 0 54px rgba(98,238,225,0.08)
   }
-  .hero h1 .ash{color:var(--cyan);font-weight:500}
+  .hero h1 .ash{color:var(--cyan);font-weight:500;text-shadow:0 0 36px rgba(98,238,225,0.24)}
   .subhead{
-    font-size:1.1rem;color:var(--muted);max-width:660px;margin:0 auto 42px;line-height:1.95;font-weight:400;
+    font-size:1.05rem;color:var(--muted);max-width:590px;margin:0 0 32px;line-height:1.85;font-weight:400
   }
-  .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .hero-actions{display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap}
+  .hero-stats{display:flex;gap:0;margin-top:42px;padding-top:21px;border-top:1px solid rgba(148,163,184,0.18)}
+  .hero-stat{display:flex;flex-direction:column;gap:2px;padding:0 24px;border-left:1px solid rgba(148,163,184,0.18)}
+  .hero-stat:first-child{padding-left:0;border-left:0}
+  .hero-stat strong{font:600 1.55rem/1 'Space Grotesk',sans-serif;color:var(--ink)}
+  .hero-stat span{font:0.62rem 'IBM Plex Mono',monospace;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase}
+  .hero-visual{position:relative;display:grid;place-items:center;width:min(100%,460px);aspect-ratio:1;margin:0 auto}
+  .hero-visual::before{content:'';position:absolute;inset:14%;border-radius:50%;background:radial-gradient(circle,rgba(98,238,225,0.13),rgba(67,92,155,0.08) 42%,transparent 72%);filter:blur(14px)}
+  .visual-grid{position:absolute;inset:12%;border:1px solid rgba(98,238,225,0.13);border-radius:50%;background:linear-gradient(rgba(98,238,225,0.045) 1px,transparent 1px),linear-gradient(90deg,rgba(98,238,225,0.045) 1px,transparent 1px);background-size:28px 28px;mask-image:radial-gradient(circle,black 28%,transparent 72%);transform:rotate(15deg)}
+  .orbit{position:absolute;border-radius:50%}
+  .orbit-outer{inset:3%;border:1px dashed rgba(98,238,225,0.22);transform:rotate(-18deg);animation:orbit 46s linear infinite}
+  .orbit-outer::before,.orbit-outer::after{content:'';position:absolute;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px var(--cyan);top:17%;left:18%}
+  .orbit-outer::after{width:5px;height:5px;background:var(--ember);box-shadow:0 0 18px var(--ember);top:auto;left:auto;right:12%;bottom:23%}
+  .orbit-inner{inset:17%;border:1px solid rgba(255,121,79,0.18);box-shadow:inset 0 0 42px rgba(98,238,225,0.035),0 0 36px rgba(98,238,225,0.035)}
+  @keyframes orbit{to{transform:rotate(342deg)}}
+  .orbit-center{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:48%;aspect-ratio:1;border:1px solid rgba(98,238,225,0.26);border-radius:50%;background:radial-gradient(circle at 50% 36%,rgba(98,238,225,0.14),rgba(15,24,36,0.96) 68%);box-shadow:0 0 64px rgba(98,238,225,0.1),inset 0 0 36px rgba(98,238,225,0.06)}
+  .hero-flame{width:35px;height:48px;margin:0 0 12px}
+  .hero-flame::after{width:19px;height:24px;top:-8px}
+  .core-code{font:0.53rem 'IBM Plex Mono',monospace;color:var(--muted);letter-spacing:0.12em}
+  .orbit-center strong{margin-top:7px;text-align:center;font:600 clamp(0.9rem,1.8vw,1.2rem)/1.1 'Space Grotesk',sans-serif;letter-spacing:0.03em;text-transform:uppercase}
+  .orbit-center strong span{color:var(--cyan)}
+  .orbit-node{position:absolute;display:flex;align-items:center;gap:9px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:rgba(13,20,30,0.9);box-shadow:0 10px 24px rgba(0,0,0,0.3);font-family:'IBM Plex Mono',monospace}
+  .orbit-node span{color:var(--cyan);font-size:0.66rem}
+  .orbit-node b{font-size:0.63rem;letter-spacing:0.1em}
+  .orbit-node-origin{top:18%;left:2%}
+  .orbit-node-now{right:1%;bottom:21%}
+  .visual-caption{position:absolute;bottom:2%;display:flex;align-items:center;gap:9px;color:var(--muted);font:0.58rem 'IBM Plex Mono',monospace;letter-spacing:0.16em}
+  .live-dot{width:6px;height:6px;border-radius:50%;background:var(--ember);box-shadow:0 0 12px var(--ember)}
+  @media(max-width:899px){
+    .hero{min-height:auto;padding:82px 0 70px}
+    .hero-layout{grid-template-columns:1fr;gap:34px}
+    .hero-copy{max-width:720px;margin:0 auto;text-align:center}
+    .subhead{margin:0 auto 30px}
+    .hero-actions{justify-content:center}
+    .hero-stats{justify-content:center;max-width:560px;margin:36px auto 0}
+    .hero-visual{width:min(100%,360px)}
+    .orbit-node-origin{left:0}
+    .orbit-node-now{right:0}
+  }
+  @media(max-width:520px){
+    .hero{padding:64px 0 54px}
+    .hero h1{font-size:clamp(2.7rem,12vw,4.2rem)}
+    .kicker{font-size:0.56rem;letter-spacing:0.08em;padding:8px 10px}
+    .hero-actions .btn{justify-content:center;padding:12px 18px;font-size:0.82rem}
+    .hero-stat{padding:0 12px}
+    .hero-stat strong{font-size:1.3rem}
+    .hero-stat span{font-size:0.52rem;letter-spacing:0.04em}
+    .hero-visual{width:min(100%,320px)}
+    .visual-caption{font-size:0.48rem;letter-spacing:0.1em}
+  }
 
   /* ========== Buttons ========== */
   .btn{
@@ -211,40 +275,36 @@
   .pullquote cite{display:block;margin-top:16px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:0.75rem;font-style:normal;color:var(--cyan);text-transform:uppercase;letter-spacing:0.14em}
 
   /* ========== Timeline ========== */
-  .timeline{position:relative;padding:56px 0}
-  .timeline::before{
-    content:'';position:absolute;left:26px;top:0;bottom:0;width:1px;background:linear-gradient(var(--line),var(--cyan),var(--line))
-  }
-  .tl-item{position:relative;padding-left:76px;margin-bottom:76px;opacity:0;transform:translateY(38px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
+  .timeline{position:relative;display:grid;gap:18px;padding:12px 0}
+  .timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:1px;background:linear-gradient(var(--line),var(--cyan),var(--line))}
+  .tl-item{position:relative;min-width:0;padding-left:30px;opacity:0;transform:translateY(24px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
   .tl-item.visible{opacity:1;transform:none}
-  .tl-item::before{
-    content:'';position:absolute;left:22px;top:3px;width:12px;height:12px;background:var(--cyan);
-    border:3px solid var(--bg);border-radius:50%;z-index:2;box-shadow:0 0 0 3px var(--cyan-glow),0 0 18px rgba(98,238,225,0.34)
-  }
-  .tl-item::after{
-    content:'';position:absolute;left:25px;top:16px;width:1px;height:calc(100% - 14px);background:var(--line);z-index:1
-  }
-  .tl-item:last-child::after{display:none}
-  .tl-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}
-  .tl-year{
-    font-family:'Inter',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;
-    color:var(--cyan);font-family:'IBM Plex Mono',monospace;display:block;margin-bottom:2px;min-width:88px
-  }
-  .tl-title{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;margin-bottom:0}
-  .tl-desc{color:var(--muted);font-size:0.97rem;margin-bottom:14px;line-height:1.8}
-  .tl-btn{
-    display:inline-flex;align-items:center;gap:7px;background:none;border:none;
-    color:var(--ink);font-family:'Inter',sans-serif;font-weight:600;font-size:0.88rem;
-    cursor:pointer;padding:0;text-decoration:underline;text-decoration-color:transparent;
-    text-decoration-thickness:1px;transition:text-decoration-color 0.2s
-  }
-  .tl-btn:hover{text-decoration-color:var(--ember);color:var(--ember)}
-  @media(min-width:768px){
+  .tl-item::before{content:'';position:absolute;left:0;top:23px;width:12px;height:12px;background:var(--cyan);border:3px solid var(--bg);border-radius:50%;z-index:2;box-shadow:0 0 0 3px var(--cyan-glow),0 0 18px rgba(98,238,225,0.34)}
+  .tl-card{height:100%;padding:22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(18,29,41,0.94),rgba(10,16,24,0.96));transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s}
+  .tl-card:hover{border-color:rgba(98,238,225,0.48);transform:translateY(-3px);box-shadow:0 18px 42px rgba(0,0,0,0.3)}
+  .tl-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .tl-number{display:grid;place-items:center;flex:0 0 34px;height:34px;border:1px solid rgba(98,238,225,0.22);border-radius:10px;color:var(--cyan);background:rgba(98,238,225,0.06);font:0.7rem 'IBM Plex Mono',monospace}
+  .tl-year{color:var(--muted);font:0.66rem 'IBM Plex Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px}
+  .tl-title{font:600 1.24rem/1.2 'Space Grotesk',sans-serif;margin:0}
+  .tl-desc{color:var(--muted);font-size:0.91rem;margin:0;line-height:1.7}
+  .tl-impact{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:17px 0}
+  .tl-impact-item{min-width:0;padding:12px;border:1px solid rgba(148,163,184,0.1);border-radius:11px;background:rgba(7,11,18,0.42)}
+  .tl-impact-label{display:block;margin-bottom:7px;font:0.58rem 'IBM Plex Mono',monospace;letter-spacing:0.12em;text-transform:uppercase}
+  .tl-impact-item.promise .tl-impact-label{color:var(--cyan)}
+  .tl-impact-item.peril .tl-impact-label{color:var(--ember)}
+  .tl-impact-item p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;color:var(--muted);font-size:0.8rem;line-height:1.5;margin:0}
+  .tl-btn{display:inline-flex;align-items:center;gap:7px;background:none;border:0;color:var(--ink);font-family:'Inter',sans-serif;font-weight:600;font-size:0.82rem;cursor:pointer;padding:3px 0}
+  .tl-btn span{color:var(--cyan);transition:transform 0.2s}
+  .tl-btn:hover{color:var(--cyan)}
+  .tl-btn:hover span{transform:translateX(4px)}
+  @media(max-width:520px){.tl-impact{grid-template-columns:1fr}.tl-card{padding:18px}.tl-title{font-size:1.12rem}}
+  @media(min-width:900px){
+    .timeline{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:72px;row-gap:20px}
     .timeline::before{left:50%;transform:translateX(-50%)}
-    .tl-item{padding-left:0;width:50%;padding-right:56px}
-    .tl-item:nth-child(even){padding-left:56px;padding-right:0}
-    .tl-item:nth-child(even)::before{left:50%;transform:translateX(-50%)}
-    .tl-item:nth-child(even)::after{left:50%;transform:translateX(-50%);top:6px;height:calc(100% - 14px)}
+    .tl-item{grid-column:1;padding:0}
+    .tl-item:nth-child(even){grid-column:2}
+    .tl-item::before{left:calc(100% + 36px);top:25px;transform:translateX(-50%)}
+    .tl-item:nth-child(even)::before{left:-36px}
   }
 
   /* ========== Groups ========== */
@@ -256,6 +316,7 @@
   .group-list{display:grid;gap:16px}
   .group-row{
     display:flex;align-items:center;gap:20px;padding:22px 24px;
+    width:100%;text-align:left;color:var(--ink);font:inherit;cursor:pointer;
     background:rgba(7,11,18,0.62);border:1px solid var(--line);border-radius:14px;transition:border-color 0.25s,box-shadow 0.25s,transform 0.25s
   }
   .group-row:hover{border-color:var(--cyan);box-shadow:0 12px 32px rgba(98,238,225,0.1);transform:translateX(-3px)}
@@ -302,13 +363,13 @@
   /* ========== Modal ========== */
   .backdrop{
     position:fixed;inset:0;background:rgba(2,5,9,0.78);z-index:100;
-    opacity:0;pointer-events:none;transition:opacity 0.35s;backdrop-filter:blur(10px)
+    opacity:0;pointer-events:none;visibility:hidden;transition:opacity 0.35s,visibility 0.35s;backdrop-filter:blur(10px)
   }
-  .backdrop.open{opacity:1;pointer-events:auto}
+  .backdrop.open{opacity:1;pointer-events:auto;visibility:visible}
   .modal{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.94);
     width:90%;max-width:740px;max-height:92vh;background:linear-gradient(145deg,var(--paper-raised),var(--paper));border:1px solid var(--line);
-    border-radius:22px;padding:42px;overflow-y:auto;z-index:101;box-shadow:0 24px 90px rgba(0,0,0,0.6),0 0 40px rgba(98,238,225,0.06)
+    border-radius:22px;padding:42px;overflow-y:auto;z-index:101;box-shadow:0 24px 90px rgba(0,0,0,0.6),0 0 40px rgba(98,238,225,0.06);
     opacity:0;transform:translate(-50%,-50%) scale(0.91);transition:opacity 0.35s,transform 0.35s
   }
   .backdrop.open .modal{opacity:1;transform:translate(-50%,-50%) scale(1)}
@@ -331,6 +392,19 @@
     color:var(--ember-dark);display:block;margin-bottom:10px
   }
   .modal p{color:var(--muted);font-size:1.05rem;line-height:1.95}
+  @media(max-width:560px){
+    .modal{width:calc(100% - 24px);max-height:calc(100svh - 24px);padding:30px 22px}
+    .modal-title{font-size:1.65rem;padding-right:24px}
+    .close-btn{top:14px;right:16px}
+    .modal p{font-size:0.94rem;line-height:1.75}
+    .groups-wrap{padding:30px 16px}
+    .group-row{gap:12px;padding:16px 14px}
+    .group-badge{width:38px;height:38px;font-size:1rem}
+    .group-topic{font-size:0.9rem}
+    .group-students{white-space:normal;text-align:right;font-size:0.7rem}
+    .section-head h2{font-size:2.1rem}
+    .section-head{margin-bottom:48px}
+  }
 
   /* ========== Scroll reveal ========== */
   .reveal{opacity:0;transform:translateY(42px);transition:opacity 0.9s var(--ease),transform 0.9s var(--ease)}
@@ -343,37 +417,62 @@
     .tl-item,.card{break-inside:avoid}
   }
 
-  @media(min-width:768px){.nav-links{display:flex}.menu-btn{display:none}}
+  @media(max-width:520px){.brand{font-size:0.77rem;gap:6px}.brand-mark{width:30px;height:30px}}
+  @media(max-width:360px){.brand{font-size:0.65rem;gap:4px}.menu-btn{margin-left:4px;padding:5px 8px;font-size:1rem}}
+  @media(min-width:860px){.nav-links{display:flex}.menu-btn{display:none}}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
 </style>
 </head>
-<body>
+<body id="top">
 
 <header id="site-header">
   <div class="container nav">
-    <div class="brand">
-      From Fire<span class="ember">to Human Extinction</span><span class="separator"></span>
-      <div class="flame" style="margin-left:6px"></div>
-    </div>
-    <ul class="nav-links">
+    <a class="brand" href="#top" aria-label="From Fire to Human Extinction, home">
+      <span class="brand-mark"><span class="flame"></span></span>
+      <span>From Fire<span class="ember"> to Human Extinction</span></span>
+    </a>
+    <nav aria-label="Primary navigation">
+    <ul class="nav-links" id="primary-navigation">
       <li><a href="#about">About</a></li>
       <li><a href="#timeline">Innovations</a></li>
       <li><a href="#groups">Groups</a></li>
       <li><a href="#qr">QR</a></li>
     </ul>
-    <button class="menu-btn" id="menuBtn" aria-label="Menu">&#9776;</button>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
   </div>
+  <div class="page-progress" aria-hidden="true"><span id="readingProgress"></span></div>
 </header>
 
-<section class="hero reveal">
-  <div class="container">
-    <div class="kicker"><span class="dot"></span>Class of 27 &bull; 9 Groups &bull; Presentation Companion</div>
-    <h1>From Fire to<span class="ash"> Human Extinction</span></h1>
-    <p class="subhead">Every innovation that lifted civilisation also carries the seed of how we might end. Nine breakthroughs. Nine groups. One question: can we survive our own ingenuity?</p>
-    <div class="hero-actions">
-      <a href="#timeline" class="btn btn-primary">Explore Innovations</a>
-      <a href="#groups" class="btn btn-outline">Class Groups</a>
-      <a href="#qr" class="btn btn-ghost">QR Code</a>
+<main>
+<section class="hero">
+  <div class="container hero-layout">
+    <div class="hero-copy">
+      <div class="kicker"><span class="dot"></span>FIELD NOTES&nbsp; / &nbsp;CLASS 27&nbsp; / &nbsp;09 BREAKTHROUGHS</div>
+      <h1>Every leap<br>casts a <span class="ash">shadow.</span></h1>
+      <p class="subhead">From humanity's first controlled flame to artificial intelligence, every breakthrough expands what we can do—and what we can destroy. Trace nine turning points. Decide what comes next.</p>
+      <div class="hero-actions">
+        <a href="#timeline" class="btn btn-primary">Enter the timeline <span aria-hidden="true">→</span></a>
+        <a href="#groups" class="btn btn-outline">Meet the groups</a>
+      </div>
+      <div class="hero-stats" aria-label="Project at a glance">
+        <div class="hero-stat"><strong>09</strong><span>turning points</span></div>
+        <div class="hero-stat"><strong>27</strong><span>student voices</span></div>
+        <div class="hero-stat"><strong>01</strong><span>shared future</span></div>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="visual-grid"></div>
+      <div class="orbit orbit-outer"></div>
+      <div class="orbit orbit-inner"></div>
+      <div class="orbit-center">
+        <div class="flame hero-flame"></div>
+        <span class="core-code">HUMANITY / 001—009</span>
+        <strong>From Fire<br><span>to Future</span></strong>
+      </div>
+      <div class="orbit-node orbit-node-origin"><span>01</span><b>FIRE</b></div>
+      <div class="orbit-node orbit-node-now"><span>09</span><b>AI</b></div>
+      <div class="visual-caption"><span class="live-dot"></span> A SPECIES SHAPED BY ITS TOOLS</div>
     </div>
   </div>
 </section>
@@ -408,7 +507,7 @@
       </div>
     </div>
     <div class="pullquote reveal">
-      "We are the first species to hold our own extinction in our hands&mdash;and the first to have the power to prevent it."
+      We are the first species to hold our own extinction in our hands—and the first to have the power to prevent it.
       <cite>Presentation Theme</cite>
     </div>
   </div>
@@ -459,18 +558,20 @@
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="container">
-    <div class="footer-line">From Fire<span class="ember">to Human Extinction</span> &bull; Class Presentation</div>
+    <div class="footer-line">From Fire <span class="ember">to Human Extinction</span> &bull; Class Presentation</div>
     <div>27 students &middot; 9 groups &middot; Innovations &amp; existential risk</div>
     <div class="footer-meta"><span>GitHub Pages</span><span>Self-hosted QR</span><span>No build step</span></div>
   </div>
 </footer>
 
 <!-- Modal -->
-<div class="backdrop" id="backdrop">
-  <div class="modal">
-    <button class="close-btn" id="closeModal">&times;</button>
+<div class="backdrop" id="backdrop" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" aria-describedby="mSub" tabindex="-1">
+    <button class="close-btn" id="closeModal" aria-label="Close details">&times;</button>
     <div class="modal-head">
       <div class="badge" id="mBadge">1</div>
       <div>
@@ -502,22 +603,31 @@
   // ========== Header scroll state ==========
   (function(){
     const header=document.getElementById('site-header');
-    window.addEventListener('scroll',()=>{
+    const progress=document.getElementById('readingProgress');
+    let ticking=false;
+    function updateHeader(){
       header.classList.toggle('scrolled',window.scrollY>40)
-    });
+      const scrollable=document.documentElement.scrollHeight-window.innerHeight;
+      progress.style.width=(scrollable>0?Math.min(window.scrollY/scrollable,1)*100:0)+'%';
+      ticking=false;
+    }
+    window.addEventListener('scroll',()=>{
+      if(!ticking){window.requestAnimationFrame(updateHeader);ticking=true;}
+    },{passive:true});
+    updateHeader();
   })();
 
   // ========== Data ==========
   const innovations = [
-    {era:"Prehistory",title:"Mastery of Fire",what:"The first technology that separated humans from other animals&mdash;warmth, protection, cooked food, longer days.",promise:"Enabled survival in cold climates, nutrient-dense diets, and social gathering around the flame.",peril:"Uncontrolled fire today means catastrophic wildfires, urban conflagrations, and accidental disaster.",students:"Students 1, 2, 3"},
+    {era:"Prehistory",title:"Mastery of Fire",what:"The first technology that separated humans from other animals—warmth, protection, cooked food, longer days.",promise:"Enabled survival in cold climates, nutrient-dense diets, and social gathering around the flame.",peril:"Uncontrolled fire today means catastrophic wildfires, urban conflagrations, and accidental disaster.",students:"Students 1, 2, 3"},
     {era:"~10,000 BCE",title:"Agriculture",what:"Settled farming, surplus food, and the birth of cities and civilisation.",promise:"Freed humans from constant hunting, enabling population growth and specialization.",peril:"Industrial farming drives soil collapse, deforestation, and ecosystem failure.",students:"Students 4, 5, 6"},
     {era:"~1440 CE",title:"Printing Press",what:"Mass literacy and the rapid spread of ideas across continents.",promise:"Sparked the scientific revolution, education, and shared knowledge.",peril:"Information overload, propaganda, and the collapse of shared truth.",students:"Students 7, 8, 9"},
-    {era:"1760&ndash;1840",title:"Steam Engine",what:"The Industrial Revolution begins&mdash;mechanised production and the fossil-fuel economy.",promise:"Unprecedented productivity, transport, and modern material life.",peril:"Coal and oil burning&mdash;the root of anthropogenic climate change.",students:"Students 10, 11, 12"},
-    {era:"1945",title:"Nuclear Fission",what:"The atomic bomb&mdash;for the first time, humans could end civilisation in hours.",promise:"Nuclear energy and a deeper understanding of physics.",peril:"Nuclear war, accidental launch, and weapons proliferation.",students:"Students 13, 14, 15"},
-    {era:"1947",title:"The Transistor",what:"The building block of modern electronics&mdash;computers, phones, the digital age.",promise:"All of computing, global communication, and modern medicine.",peril:"Automated warfare, mass surveillance, and infrastructure collapse.",students:"Students 16, 17, 18"},
-    {era:"1973",title:"Recombinant DNA",what:"Genetic engineering begins&mdash;editing genes to cure disease and improve crops.",promise:"Cures for genetic disease, drought-resistant crops, longer lives.",peril:"Engineered pathogens, lab leaks, and bioweapons deadlier than nature.",students:"Students 19, 20, 21"},
-    {era:"1989",title:"The World Wide Web",what:"Global, instant communication&mdash;all human knowledge connected at light speed.",promise:"Instant access to information and worldwide collaboration.",peril:"Cyberwar, AI-generated misinformation, and the erosion of reality.",students:"Students 22, 23, 24"},
-    {era:"2020s",title:"Artificial Intelligence",what:"Machines that reason, create, and act autonomously&mdash;the most powerful tool yet built.",promise:"Solving disease, climate, and complexity beyond human capacity.",peril:"Misaligned superintelligence, loss of control, and human obsolescence.",students:"Students 25, 26, 27"}
+    {era:"1760–1840",title:"Steam Engine",what:"The Industrial Revolution begins—mechanised production and the fossil-fuel economy.",promise:"Unprecedented productivity, transport, and modern material life.",peril:"Coal and oil burning—the root of anthropogenic climate change.",students:"Students 10, 11, 12"},
+    {era:"1945",title:"Nuclear Fission",what:"The atomic bomb—for the first time, humans could end civilisation in hours.",promise:"Nuclear energy and a deeper understanding of physics.",peril:"Nuclear war, accidental launch, and weapons proliferation.",students:"Students 13, 14, 15"},
+    {era:"1947",title:"The Transistor",what:"The building block of modern electronics—computers, phones, the digital age.",promise:"All of computing, global communication, and modern medicine.",peril:"Automated warfare, mass surveillance, and infrastructure collapse.",students:"Students 16, 17, 18"},
+    {era:"1973",title:"Recombinant DNA",what:"Genetic engineering begins—editing genes to cure disease and improve crops.",promise:"Cures for genetic disease, drought-resistant crops, longer lives.",peril:"Engineered pathogens, lab leaks, and bioweapons deadlier than nature.",students:"Students 19, 20, 21"},
+    {era:"1989",title:"The World Wide Web",what:"Global, instant communication—all human knowledge connected at light speed.",promise:"Instant access to information and worldwide collaboration.",peril:"Cyberwar, AI-generated misinformation, and the erosion of reality.",students:"Students 22, 23, 24"},
+    {era:"2020s",title:"Artificial Intelligence",what:"Machines that reason, create, and act autonomously—the most powerful tool yet built.",promise:"Solving disease, climate, and complexity beyond human capacity.",peril:"Misaligned superintelligence, loss of control, and human obsolescence.",students:"Students 25, 26, 27"}
   ];
 
   // ========== Timeline render ==========
@@ -527,17 +637,23 @@
       const el=document.createElement('div');
       el.className='tl-item';
       el.innerHTML=`
-        <div class="tl-head">
-          <span class="tl-year">${inv.era}</span>
-          <h3 class="tl-title">${inv.title}</h3>
-        </div>
-        <p class="tl-desc">${inv.what}</p>
-        <button class="tl-btn" data-index="${i}">View details &rarr;</button>
+        <article class="tl-card">
+          <div class="tl-head">
+            <span class="tl-number">${String(i+1).padStart(2,'0')}</span>
+            <div><div class="tl-year">${inv.era}</div><h3 class="tl-title">${inv.title}</h3></div>
+          </div>
+          <p class="tl-desc">${inv.what}</p>
+          <div class="tl-impact">
+            <div class="tl-impact-item promise"><span class="tl-impact-label">Promise</span><p>${inv.promise}</p></div>
+            <div class="tl-impact-item peril"><span class="tl-impact-label">Peril</span><p>${inv.peril}</p></div>
+          </div>
+          <button class="tl-btn" data-index="${i}" aria-label="Read the full breakdown of ${inv.title}">Read full breakdown <span aria-hidden="true">&rarr;</span></button>
+        </article>
       `;
       list.appendChild(el);
     });
     list.querySelectorAll('.tl-btn').forEach(btn=>{
-      btn.addEventListener('click',()=>{openModal(btn.getAttribute('data-index'));});
+      btn.addEventListener('click',()=>{openModal(Number(btn.getAttribute('data-index')));});
     });
   })();
 
@@ -545,12 +661,14 @@
   (function(){
     const list=document.getElementById('group-list');
     innovations.forEach((inv,i)=>{
-      const el=document.createElement('div');
+      const el=document.createElement('button');
       el.className='group-row';
+      el.type='button';
+      el.setAttribute('aria-label',`Open ${inv.title} group details`);
       el.innerHTML=`
-        <div class="group-badge">${i+1}</div>
-        <div class="group-topic">${inv.title}</div>
-        <div class="group-students">${inv.students}</div>
+        <span class="group-badge">${i+1}</span>
+        <span class="group-topic">${inv.title}</span>
+        <span class="group-students">${inv.students}</span>
       `;
       el.addEventListener('click',()=>{openModal(i);});
       list.appendChild(el);
@@ -560,7 +678,9 @@
   // ========== Modal ==========
   (function(){
     const backdrop=document.getElementById('backdrop');
+    const modal=backdrop.querySelector('.modal');
     const closeBtn=document.getElementById('closeModal');
+    let returnFocus=null;
     const els={
       badge:document.getElementById('mBadge'),
       title:document.getElementById('mTitle'),
@@ -572,6 +692,8 @@
     };
     function openModal(i){
       const inv=innovations[i];
+      if(!inv)return;
+      returnFocus=document.activeElement;
       els.badge.textContent=i+1;
       els.title.textContent=inv.title;
       els.sub.textContent=inv.era;
@@ -580,15 +702,32 @@
       els.peril.textContent=inv.peril;
       els.students.textContent=inv.students;
       backdrop.classList.add('open');
+      backdrop.setAttribute('aria-hidden','false');
       document.body.style.overflow='hidden';
+      window.setTimeout(()=>closeBtn.focus(),0);
     }
     function closeModal(){
+      if(!backdrop.classList.contains('open'))return;
       backdrop.classList.remove('open');
+      backdrop.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
+      if(returnFocus&&typeof returnFocus.focus==='function')returnFocus.focus();
     }
     closeBtn.addEventListener('click',closeModal);
     backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeModal();});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+    document.addEventListener('keydown',e=>{
+      if(!backdrop.classList.contains('open'))return;
+      if(e.key==='Escape'){closeModal();return;}
+      if(e.key==='Tab'){
+        const focusable=modal.querySelectorAll('button:not([disabled]),a[href],textarea:not([disabled]),[tabindex]:not([tabindex="-1"])');
+        const first=focusable[0];
+        const last=focusable[focusable.length-1];
+        if(!first){e.preventDefault();modal.focus();}
+        else if(!modal.contains(document.activeElement)){e.preventDefault();(e.shiftKey?last:first).focus();}
+        else if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+      }
+    });
     window.openModal=openModal;
   })();
 
@@ -674,22 +813,27 @@
     const obs=new IntersectionObserver((ents)=>{
       ents.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
     },{threshold:0.08});
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    document.querySelectorAll('.reveal,.tl-item').forEach(el=>obs.observe(el));
   })();
 
   // ========== Mobile menu ==========
   (function(){
     const btn=document.getElementById('menuBtn');
     const links=document.querySelector('.nav-links');
+    function setMenuOpen(open){
+      links.classList.toggle('open',open);
+      btn.setAttribute('aria-expanded',String(open));
+      btn.setAttribute('aria-label',open?'Close navigation':'Open navigation');
+      btn.textContent=open?'×':'☰';
+    }
     btn.addEventListener('click',()=>{
-      const open=links.style.display==='flex';
-      links.style.display=open?'none':'flex';
-      links.style.flexDirection='column';
-      links.style.position='absolute';links.style.top='72px';links.style.right='26px';
-      links.style.background='var(--paper)';links.style.border='1px solid var(--line)';
-      links.style.borderRadius='16px';links.style.padding='24px';
-      links.style.boxShadow='0 16px 48px rgba(0,0,0,0.48)'
+      setMenuOpen(btn.getAttribute('aria-expanded')!=='true');
     });
+    links.addEventListener('click',e=>{if(e.target.closest('a'))setMenuOpen(false);});
+    document.addEventListener('click',e=>{
+      if(!btn.contains(e.target)&&!links.contains(e.target))setMenuOpen(false);
+    });
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenuOpen(false);});
   })();
 </script>
 
