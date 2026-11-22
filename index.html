@@ -526,7 +526,7 @@
 <section class="hero">
   <div class="container hero-layout">
     <div class="hero-copy">
-      <div class="kicker"><span class="dot"></span>FIELD NOTES&nbsp; / &nbsp;26 STUDENTS&nbsp; / &nbsp;09 BREAKTHROUGHS</div>
+      <div class="kicker"><span class="dot"></span>CLASS ROSTER&nbsp; / &nbsp;18 NUMBERS&nbsp; / &nbsp;09 BREAKTHROUGHS</div>
       <h1>Every leap<br>casts a <span class="ash">shadow.</span></h1>
       <p class="subhead">From humanity's first controlled flame to artificial intelligence, every breakthrough expands what we can do—and what we can destroy. Trace nine turning points. Decide what comes next.</p>
       <div class="hero-actions">
@@ -535,7 +535,7 @@
       </div>
       <div class="hero-stats" aria-label="Project at a glance">
         <div class="hero-stat"><strong>09</strong><span>turning points</span></div>
-        <div class="hero-stat"><strong>26</strong><span>student voices</span></div>
+        <div class="hero-stat"><strong>17</strong><span>eligible students</span></div>
         <div class="hero-stat"><strong>01</strong><span>shared future</span></div>
       </div>
     </div>
@@ -576,7 +576,7 @@
       <div class="card">
         <span class="card-tag">Structure</span>
         <h3>Randomized assignments</h3>
-        <p>Four teams of six or seven share the nine breakthroughs; each team covers two or three topics.</p>
+        <p>Four teams of four or five share the nine breakthroughs; each team covers two or three topics.</p>
       </div>
       <div class="card">
         <span class="card-tag">Question</span>
@@ -654,7 +654,7 @@
 <footer>
   <div class="container">
     <div class="footer-line">From Fire <span class="ember">to Human Extinction</span> &bull; Class Presentation</div>
-    <div>26 students &middot; 4 groups &middot; Innovations &amp; existential risk</div>
+    <div>18 student numbers &middot; 17 assigned &middot; 4 groups</div>
     <div class="footer-meta"><span>GitHub Pages</span><span>Self-hosted QR</span><span>No build step</span></div>
   </div>
 </footer>
@@ -723,9 +723,8 @@
 
   const teamTopics=[[1,4],[3,5,6],[2,7],[0,8]];
   const studentTeamByNumber={
-    1:4,2:1,3:1,4:1,5:2,6:3,7:1,8:3,9:3,10:4,
-    11:3,12:3,13:4,14:3,15:2,16:2,17:2,19:2,20:2,
-    21:1,22:2,23:1,24:4,25:4,26:4,27:1
+    1:4,2:3,3:4,4:2,5:2,6:1,7:2,8:3,9:3,
+    10:3,11:4,12:1,13:1,14:1,15:2,16:4,17:1
   };
   function teamForInnovation(index){
     return teamTopics.findIndex(topicIndexes=>topicIndexes.includes(index));
@@ -770,7 +769,7 @@
           <span class="group-topic">Team ${i+1}</span>
           <span class="group-topics">${topicIndexes.map(index=>innovations[index].title).join(' · ')}</span>
         </span>
-        <span class="group-students"><span class="team-count" data-team-count="${i+1}">—</span> / 7 students</span>
+        <span class="group-students"><span class="team-count" data-team-count="${i+1}">—</span> / 5 students</span>
       `;
       list.appendChild(el);
     });
@@ -784,7 +783,7 @@
     const status=document.getElementById('assignmentStatus');
     const result=document.getElementById('assignmentResult');
 
-    for(let number=1;number<=27;number++){
+    for(let number=1;number<=18;number++){
       if(number===18)continue;
       const option=document.createElement('option');
       option.value=number;
@@ -808,7 +807,7 @@
     form.addEventListener('submit',event=>{
       event.preventDefault();
       const studentNumber=Number(numberSelect.value);
-      if(!Number.isInteger(studentNumber)||studentNumber<1||studentNumber>27||studentNumber===18){
+      if(!Number.isInteger(studentNumber)||studentNumber<1||studentNumber>18||studentNumber===18){
         status.textContent='Choose a valid student number.';
         status.classList.add('error');
         return;

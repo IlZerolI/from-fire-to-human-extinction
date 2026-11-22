@@ -1,7 +1,8 @@
 # Class Group Assignments — From Fire to Human Extinction
 
-**Students:** 26 eligible student numbers
-**Structure:** Four fixed teams (two of seven and two of six)
+**Class roster:** Student numbers 1–18; student 18 is excluded
+**Assigned students:** 17
+**Structure:** Four fixed teams (one of five and three of four)
 **Theme:** Innovations that built civilisation — and how each could end it
 
 ## Team topics
@@ -15,9 +16,9 @@
 
 ## How assignments work
 
-- The 26 eligible student numbers are shuffled into four balanced teams once.
+- The 17 eligible student numbers are shuffled into four balanced teams once.
 - Select your number on the website to see your team. That number always returns the same team, including on repeat scans or other phones.
-- The excluded number is not available in the selector.
+- Student 18 is excluded and is not available in the selector.
 - No backend is needed; the fixed mapping is part of the static website.
 
 ## What each team presents
@@ -29,7 +30,7 @@
 
 ## Suggested roles
 
-Teams of six or seven can divide research, sourcing, slide design, and presenting across members. Rotate presentation roles where practical.
+Teams of four or five can divide research, sourcing, slide design, and presenting across members. Rotate presentation roles where practical.
 
 ## Project timeline
 
