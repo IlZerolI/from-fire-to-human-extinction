@@ -1,70 +1,48 @@
 # Class Group Assignments — From Fire to Human Extinction
 
-**Class size:** 27 students  
-**Structure:** 9 groups of 3 students  
-**Theme:** Innovations that built civilisation — and how each could end it  
+**Students:** 26 eligible student numbers
+**Structure:** Four fixed teams (two of seven and two of six)
+**Theme:** Innovations that built civilisation — and how each could end it
 
-## Group structure (fixed seating / roll number order)
+## Team topics
 
-| Group | Innovation | Students | Core question |
-|-------|-----------|----------|---------------|
-| 1 | Mastery of Fire (Prehistory) | 1, 2, 3 | What did fire give us? How does uncontrolled fire end us today? |
-| 2 | Agriculture (~10,000 BCE) | 4, 5, 6 | Farming fed civilisation. How does industrial agriculture collapse ecosystems? |
-| 3 | Printing Press (~1440 CE) | 7, 8, 9 | Mass literacy changed the world. How does information overload destroy shared truth? |
-| 4 | Steam Engine (1760–1840) | 10, 11, 12 | Industry modernised life. How does burning fossil fuels heat the planet? |
-| 5 | Nuclear Fission (1945) | 13, 14, 15 | The atomic bomb ended war in hours. Could it end civilisation? |
-| 6 | The Transistor (1947) | 16, 17, 18 | Chips built the digital age. How do automated weapons and cyberwar threaten us? |
-| 7 | Recombinant DNA (1973) | 19, 20, 21 | Gene editing cures disease. Could an engineered pathogen cause extinction? |
-| 8 | The World Wide Web (1989) | 22, 23, 24 | Global instant knowledge. How do cyberwar and AI misinformation erase reality? |
-| 9 | Artificial Intelligence (2020s) | 25, 26, 27 | The most powerful tool yet. Could misaligned superintelligence make humans obsolete? |
+| Team | Innovations | Core question |
+|---|---|---|
+| 1 | Agriculture; Nuclear Fission | How can food systems and nuclear energy sustain civilisation or put it at risk? |
+| 2 | Steam Engine; Transistor; Recombinant DNA | How can industrial, digital, and biological technologies transform life and create new risks? |
+| 3 | Printing Press; World Wide Web | How do communication technologies reshape shared knowledge and truth? |
+| 4 | Mastery of Fire; Artificial Intelligence | How have humanity's earliest and newest tools changed what people can do—and what could go wrong? |
 
-## What each group presents (4 parts)
+## How assignments work
 
-1. **The innovation** — what it is, when it emerged, how it works.
-2. **How it advanced humanity** — the benefits, progress, lives saved/improved.
-3. **How it could kill us** — the extinction pathway, historical near-misses, worst-case scenarios.
-4. **Can we control it?** — regulation, safeguards, whether the genie is out of the bottle.
+- The 26 eligible student numbers are shuffled into four balanced teams once.
+- Select your number on the website to see your team. That number always returns the same team, including on repeat scans or other phones.
+- The excluded number is not available in the selector.
+- No backend is needed; the fixed mapping is part of the static website.
 
-## Suggested group roles (rotate per presentation)
+## What each team presents
 
-- **Researcher** — gathers facts, sources, examples.
-- **Presenter** — speaks during the presentation.
-- **Designer** — builds the slide(s) / visuals.
+1. **The innovations** — what they are, when they emerged, and how they work.
+2. **How they advanced humanity** — benefits, progress, and lives saved or improved.
+3. **How they could cause harm** — pathways to severe or existential risk, historical near-misses, and worst-case scenarios.
+4. **Can we control the risks?** — safeguards, regulation, and whether the benefits outweigh the dangers.
 
-## Timeline for the project
+## Suggested roles
+
+Teams of six or seven can divide research, sourcing, slide design, and presenting across members. Rotate presentation roles where practical.
+
+## Project timeline
 
 | Milestone | Target |
-|-----------|--------|
-| Groups confirmed | Day 1 |
-| Innovation research complete | Day 3 |
+|---|---|
+| Teams confirmed | Day 1 |
+| Research complete | Day 3 |
 | Slides drafted | Day 5 |
 | Full rehearsal | Day 7 |
 | Presentation day | Day 8 |
 
 ## Using the website
 
-- The site at `index.html` is a companion to the slide deck.
-- Each timeline entry matches one group above — groups can reference their entry directly.
-- The QR code section links to the live GitHub Pages site so classmates can open it on their phones.
-- Edit `index.html` in any text editor; no build step required.
-
-## Deploy to GitHub Pages (one person, or rotate)
-
-1. Create a GitHub repo named `from-fire-to-human-extinction`.
-2. Push these files:
-   ```powershell
-   git init
-   git add .
-   git commit -m "Add presentation website"
-   git branch -M main
-   git remote add origin https://github.com/<yourusername>/from-fire-to-human-extinction.git
-   git push -u origin main
-   ```
-3. GitHub **Settings → Pages**: source = `main`, folder = `/ (root)`.
-4. Site goes live at `https://<yourusername>.github.io/from-fire-to-human-extinction/`.
-
-## Notes
-
-- Roll numbers 1–27 map to your class list. Reassign names after groups are confirmed.
-- Group size of 3 keeps everyone accountable and presentations tight (5–7 minutes each).
-- Total presentation time: ~60–70 minutes including transitions and Q&A.
+- The timeline covers all nine innovations, organized under the four team topics above.
+- The QR code links to the live GitHub Pages site.
+- Assignments are fixed in the site so scans never change a student's team.

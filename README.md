@@ -1,52 +1,47 @@
 # From Fire to Human Extinction
 
-Premium presentation companion website for a class of 27 students (9 groups of 3).
+Presentation companion website for 26 students, exploring innovations that built civilisation and how they could threaten it.
 
-## Theme
-Innovations that built civilisation — and how each could end it.
-From mastery of fire to artificial intelligence, every breakthrough carries an extinction risk.
+## Project files
 
-## What's in this folder
-- `index.html` — the premium website (animated timeline, interactive groups, QR code)
-- `qrcode-generator.min.js` — locally bundled QR encoder (MIT licensed)
-- `qrcode-generator.LICENSE.txt` — QR encoder license
-- `GROUP_ASSIGNMENTS.md` — 9 groups of 3 students, each owning one innovation
-- `README.md` — this file
-- `From fire to human extinction.pptx` — the slide deck
+- `index.html` — responsive presentation website, timeline, fixed team assignments, and QR code.
+- `qrcode-generator.min.js` — locally bundled QR encoder (MIT licensed).
+- `qrcode-generator.LICENSE.txt` — QR encoder license.
+- `GROUP_ASSIGNMENTS.md` — team topics and assignment instructions.
+- `From fire to human extinction.pptx` — the slide deck.
 
-## Class groups (see GROUP_ASSIGNMENTS.md)
+## Teams
 
-1. Mastery of Fire — Students 1, 2, 3
-2. Agriculture — Students 4, 5, 6
-3. Printing Press — Students 7, 8, 9
-4. Steam Engine — Students 10, 11, 12
-5. Nuclear Fission — Students 13, 14, 15
-6. The Transistor — Students 16, 17, 18
-7. Recombinant DNA — Students 19, 20, 21
-8. The World Wide Web — Students 22, 23, 24
-9. Artificial Intelligence — Students 25, 26, 27
+The nine timeline topics are arranged into four teams. Student numbers are randomly assigned once to balanced teams of six or seven. Entering the same number again—on the same or another phone—always returns the same team. The page shows team totals, not names.
+
+| Team | Topics | Students |
+|---|---|---:|
+| 1 | Agriculture; Nuclear Fission | 7 |
+| 2 | Steam Engine; Transistor; Recombinant DNA | 7 |
+| 3 | Printing Press; World Wide Web | 6 |
+| 4 | Mastery of Fire; Artificial Intelligence | 6 |
+
+This works as a static GitHub Pages site, so no database or backend setup is required.
 
 ## Features
-- Animated particle background + entrance reveals
-- Interactive timeline with detail modals per innovation
-- Glassmorphism cards & premium dark theme
-- Locally generated QR code for the live site, with PNG download and copy-link actions
-- Fully responsive, no build step required
 
-## Edit the site
-Open `index.html` in any text editor. The `innovations` array at the bottom of the `<script>` drives the timeline and groups — edit titles, eras, descriptions, and student assignments there.
+- Animated particle background and responsive, dark futuristic design.
+- Interactive innovation timeline with detail modals.
+- Fixed, balanced assignments that stay the same on every scan.
+- Locally generated QR code for the canonical GitHub Pages URL, with PNG download and copy-link actions.
+- No build step or external service required.
 
-## QR code
-Generated in the browser from the canonical GitHub Pages URL using the bundled encoder; no third-party QR service is required. Use "Download PNG" to save the code or "Copy link" to copy the live URL.
+## Edit and preview
 
-## Deploy to GitHub Pages
+Edit `index.html` to change the timeline or page content. The `teamTopics` array determines the innovation topics, and `studentTeamByNumber` holds the fixed student-to-team mapping. If you change the mapping, keep every eligible student number assigned exactly once and keep each team at six or seven students.
+
+Run a local HTTP server to preview the page, or open `index.html` directly in a browser.
+
+## GitHub Pages
 
 The site is published from the `main` branch and repository root:
 
 - Site: https://ilzeroli.github.io/from-fire-to-human-extinction/
 - Repository: https://github.com/IlZerolI/from-fire-to-human-extinction
 
-Push changes to `main` to publish an updated version.
-
-## View locally
-Open `index.html` in your browser. No build step or server required.
+Push changes to `main` to publish an update.

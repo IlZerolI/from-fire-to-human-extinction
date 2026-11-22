@@ -313,20 +313,33 @@
     border:1px solid var(--line);border-radius:24px;
     padding:56px 30px;position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.3)
   }
+  .assignment-panel{max-width:760px;margin:0 auto 28px;padding:22px;border:1px solid rgba(98,238,225,0.18);border-radius:16px;background:rgba(7,11,18,0.52)}
+  .assignment-panel label{display:block;margin-bottom:10px;color:var(--ink);font:500 0.72rem 'IBM Plex Mono',monospace;letter-spacing:0.1em;text-transform:uppercase}
+  .assignment-controls{display:flex;gap:12px}
+  .assignment-controls select{flex:1;min-width:0;min-height:48px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font:inherit}
+  .assignment-controls select:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  .assignment-controls .btn{justify-content:center;min-height:48px;white-space:nowrap}
+  .assignment-status{margin:14px 0 0;color:var(--muted);font:0.75rem/1.6 'IBM Plex Mono',monospace}
+  .assignment-status.error{color:var(--ember)}
+  .assignment-result{margin-top:14px;padding:14px;border:1px solid rgba(98,238,225,0.24);border-radius:12px;background:rgba(98,238,225,0.055);color:var(--ink);line-height:1.6}
+  .assignment-result strong{color:var(--cyan)}
   .group-list{display:grid;gap:16px}
   .group-row{
     display:flex;align-items:center;gap:20px;padding:22px 24px;
-    width:100%;text-align:left;color:var(--ink);font:inherit;cursor:pointer;
+    width:100%;text-align:left;color:var(--ink);font:inherit;
     background:rgba(7,11,18,0.62);border:1px solid var(--line);border-radius:14px;transition:border-color 0.25s,box-shadow 0.25s,transform 0.25s
   }
-  .group-row:hover{border-color:var(--cyan);box-shadow:0 12px 32px rgba(98,238,225,0.1);transform:translateX(-3px)}
+  .group-row:hover{border-color:rgba(98,238,225,0.42);box-shadow:0 12px 32px rgba(98,238,225,0.08)}
   .group-badge{
     width:46px;height:46px;border-radius:50%;background:rgba(98,238,225,0.08);
     color:var(--cyan);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem;
     display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 4px var(--paper)
   }
-  .group-topic{font-weight:700;color:var(--ink);flex:1}
-  .group-students{color:var(--muted);font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;white-space:nowrap}
+  .team-info{display:flex;flex:1;min-width:0;flex-direction:column;gap:4px}
+  .group-topic{font-weight:700;color:var(--ink)}
+  .group-topics{color:var(--muted);font-size:0.82rem;line-height:1.55}
+  .group-students{display:flex;align-items:center;gap:5px;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.72rem;white-space:nowrap}
+  .team-count{color:var(--cyan);font-weight:600}
   .group-note{margin-top:34px;color:var(--muted);font-size:0.95rem;max-width:760px;line-height:1.8}
 
   /* ========== QR ========== */
@@ -440,11 +453,14 @@
     .tl-impact-item p{-webkit-line-clamp:2}
     .groups-wrap{padding:26px 14px;border-radius:18px}
     .group-list{gap:10px}
-    .group-row{display:grid;grid-template-columns:38px minmax(0,1fr);align-items:center;gap:2px 12px;padding:13px 14px;min-height:66px}
-    .group-row:hover{transform:none}
+    .assignment-panel{padding:18px 14px}
+    .assignment-controls{flex-direction:column}
+    .assignment-controls .btn{width:100%}
+    .group-row{display:grid;grid-template-columns:38px minmax(0,1fr);align-items:center;gap:3px 12px;padding:13px 14px;min-height:72px}
     .group-badge{grid-row:span 2;width:36px;height:36px;font-size:1rem}
     .group-topic{font-size:0.9rem}
-    .group-students{grid-column:2;white-space:normal;text-align:left;font-size:0.68rem}
+    .group-topics{font-size:0.74rem}
+    .group-students{grid-column:2;white-space:normal;text-align:left;font-size:0.66rem}
     .group-note{margin-top:22px;font-size:0.86rem;line-height:1.65}
     .qr-wrap{padding:34px 16px;border-radius:18px}
     .qr-frame{width:min(100%,300px);padding:12px;gap:12px}
@@ -480,7 +496,7 @@
   }
 
   @media(max-width:520px){.brand{font-size:0.77rem;gap:6px}.brand-mark{width:30px;height:30px}}
-  @media(max-width:360px){.brand{font-size:0.65rem;gap:4px}.menu-btn{margin-left:4px;padding:5px 8px;font-size:1rem}}
+  @media(max-width:360px){.brand{min-width:0;flex:1;font-size:0.65rem;gap:4px}.brand>span:last-child{flex:1}.menu-btn{flex-shrink:0;margin-left:4px;padding:5px 8px;font-size:1rem}}
   @media(min-width:860px){.nav-links{display:flex}.menu-btn{display:none}}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
 </style>
@@ -510,7 +526,7 @@
 <section class="hero">
   <div class="container hero-layout">
     <div class="hero-copy">
-      <div class="kicker"><span class="dot"></span>FIELD NOTES&nbsp; / &nbsp;CLASS 27&nbsp; / &nbsp;09 BREAKTHROUGHS</div>
+      <div class="kicker"><span class="dot"></span>FIELD NOTES&nbsp; / &nbsp;26 STUDENTS&nbsp; / &nbsp;09 BREAKTHROUGHS</div>
       <h1>Every leap<br>casts a <span class="ash">shadow.</span></h1>
       <p class="subhead">From humanity's first controlled flame to artificial intelligence, every breakthrough expands what we can do—and what we can destroy. Trace nine turning points. Decide what comes next.</p>
       <div class="hero-actions">
@@ -519,7 +535,7 @@
       </div>
       <div class="hero-stats" aria-label="Project at a glance">
         <div class="hero-stat"><strong>09</strong><span>turning points</span></div>
-        <div class="hero-stat"><strong>27</strong><span>student voices</span></div>
+        <div class="hero-stat"><strong>26</strong><span>student voices</span></div>
         <div class="hero-stat"><strong>01</strong><span>shared future</span></div>
       </div>
     </div>
@@ -559,8 +575,8 @@
       </div>
       <div class="card">
         <span class="card-tag">Structure</span>
-        <h3>Nine groups of three</h3>
-        <p>Each group owns one innovation: its rise, its promise, and its path to extinction.</p>
+        <h3>Randomized assignments</h3>
+        <p>Four teams of six or seven share the nine breakthroughs; each team covers two or three topics.</p>
       </div>
       <div class="card">
         <span class="card-tag">Question</span>
@@ -589,13 +605,26 @@
 <section id="groups" class="reveal">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Class roster</span>
-      <h2>Group Assignments</h2>
-      <p>27 students, 9 groups of 3. Each group presents one innovation.</p>
+      <span class="eyebrow">Balanced team assignments</span>
+      <h2>Find your team</h2>
+      <p>Enter your student number to see your fixed team. The assignments are randomized once and balanced across all four teams.</p>
     </div>
     <div class="groups-wrap">
+      <div class="assignment-panel">
+        <form id="assignmentForm">
+          <label for="studentNumber">Your student number</label>
+          <div class="assignment-controls">
+            <select id="studentNumber" name="studentNumber" required>
+              <option value="">Choose your number</option>
+            </select>
+            <button class="btn btn-primary" id="assignTeam" type="submit" disabled>Assign my team</button>
+          </div>
+        </form>
+        <p class="assignment-status" id="assignmentStatus" role="status" aria-live="polite">Your balanced team assignments are ready.</p>
+        <div class="assignment-result" id="assignmentResult" hidden></div>
+      </div>
       <div class="group-list" id="group-list"></div>
-      <p class="group-note">Each group covers: (1) what the innovation is, (2) how it advanced humanity, (3) how it could contribute to extinction, (4) whether we can control it.</p>
+      <p class="group-note">Your student number always returns the same team, including on repeat scans. Only team totals are shown; names are not collected.</p>
     </div>
   </div>
 </section>
@@ -625,7 +654,7 @@
 <footer>
   <div class="container">
     <div class="footer-line">From Fire <span class="ember">to Human Extinction</span> &bull; Class Presentation</div>
-    <div>27 students &middot; 9 groups &middot; Innovations &amp; existential risk</div>
+    <div>26 students &middot; 4 groups &middot; Innovations &amp; existential risk</div>
     <div class="footer-meta"><span>GitHub Pages</span><span>Self-hosted QR</span><span>No build step</span></div>
   </div>
 </footer>
@@ -654,7 +683,7 @@
       <p id="mPeril" style="color:var(--ember-dark);font-weight:600">-</p>
     </div>
     <div class="modal-section">
-      <span class="lbl">Group students</span>
+      <span class="lbl">Presentation team</span>
       <p id="mStudents">-</p>
     </div>
   </div>
@@ -681,16 +710,26 @@
 
   // ========== Data ==========
   const innovations = [
-    {era:"Prehistory",title:"Mastery of Fire",what:"The first technology that separated humans from other animals—warmth, protection, cooked food, longer days.",promise:"Enabled survival in cold climates, nutrient-dense diets, and social gathering around the flame.",peril:"Uncontrolled fire today means catastrophic wildfires, urban conflagrations, and accidental disaster.",students:"Students 1, 2, 3"},
-    {era:"~10,000 BCE",title:"Agriculture",what:"Settled farming, surplus food, and the birth of cities and civilisation.",promise:"Freed humans from constant hunting, enabling population growth and specialization.",peril:"Industrial farming drives soil collapse, deforestation, and ecosystem failure.",students:"Students 4, 5, 6"},
-    {era:"~1440 CE",title:"Printing Press",what:"Mass literacy and the rapid spread of ideas across continents.",promise:"Sparked the scientific revolution, education, and shared knowledge.",peril:"Information overload, propaganda, and the collapse of shared truth.",students:"Students 7, 8, 9"},
-    {era:"1760–1840",title:"Steam Engine",what:"The Industrial Revolution begins—mechanised production and the fossil-fuel economy.",promise:"Unprecedented productivity, transport, and modern material life.",peril:"Coal and oil burning—the root of anthropogenic climate change.",students:"Students 10, 11, 12"},
-    {era:"1945",title:"Nuclear Fission",what:"The atomic bomb—for the first time, humans could end civilisation in hours.",promise:"Nuclear energy and a deeper understanding of physics.",peril:"Nuclear war, accidental launch, and weapons proliferation.",students:"Students 13, 14, 15"},
-    {era:"1947",title:"The Transistor",what:"The building block of modern electronics—computers, phones, the digital age.",promise:"All of computing, global communication, and modern medicine.",peril:"Automated warfare, mass surveillance, and infrastructure collapse.",students:"Students 16, 17, 18"},
-    {era:"1973",title:"Recombinant DNA",what:"Genetic engineering begins—editing genes to cure disease and improve crops.",promise:"Cures for genetic disease, drought-resistant crops, longer lives.",peril:"Engineered pathogens, lab leaks, and bioweapons deadlier than nature.",students:"Students 19, 20, 21"},
-    {era:"1989",title:"The World Wide Web",what:"Global, instant communication—all human knowledge connected at light speed.",promise:"Instant access to information and worldwide collaboration.",peril:"Cyberwar, AI-generated misinformation, and the erosion of reality.",students:"Students 22, 23, 24"},
-    {era:"2020s",title:"Artificial Intelligence",what:"Machines that reason, create, and act autonomously—the most powerful tool yet built.",promise:"Solving disease, climate, and complexity beyond human capacity.",peril:"Misaligned superintelligence, loss of control, and human obsolescence.",students:"Students 25, 26, 27"}
+    {era:"Prehistory",title:"Mastery of Fire",what:"The first technology that separated humans from other animals—warmth, protection, cooked food, longer days.",promise:"Enabled survival in cold climates, nutrient-dense diets, and social gathering around the flame.",peril:"Uncontrolled fire today means catastrophic wildfires, urban conflagrations, and accidental disaster."},
+    {era:"~10,000 BCE",title:"Agriculture",what:"Settled farming, surplus food, and the birth of cities and civilisation.",promise:"Freed humans from constant hunting, enabling population growth and specialization.",peril:"Industrial farming drives soil collapse, deforestation, and ecosystem failure."},
+    {era:"~1440 CE",title:"Printing Press",what:"Mass literacy and the rapid spread of ideas across continents.",promise:"Sparked the scientific revolution, education, and shared knowledge.",peril:"Information overload, propaganda, and the collapse of shared truth."},
+    {era:"1760–1840",title:"Steam Engine",what:"The Industrial Revolution begins—mechanised production and the fossil-fuel economy.",promise:"Unprecedented productivity, transport, and modern material life.",peril:"Coal and oil burning—the root of anthropogenic climate change."},
+    {era:"1945",title:"Nuclear Fission",what:"The atomic bomb—for the first time, humans could end civilisation in hours.",promise:"Nuclear energy and a deeper understanding of physics.",peril:"Nuclear war, accidental launch, and weapons proliferation."},
+    {era:"1947",title:"The Transistor",what:"The building block of modern electronics—computers, phones, the digital age.",promise:"All of computing, global communication, and modern medicine.",peril:"Automated warfare, mass surveillance, and infrastructure collapse."},
+    {era:"1973",title:"Recombinant DNA",what:"Genetic engineering begins—editing genes to cure disease and improve crops.",promise:"Cures for genetic disease, drought-resistant crops, longer lives.",peril:"Engineered pathogens, lab leaks, and bioweapons deadlier than nature."},
+    {era:"1989",title:"The World Wide Web",what:"Global, instant communication—all human knowledge connected at light speed.",promise:"Instant access to information and worldwide collaboration.",peril:"Cyberwar, AI-generated misinformation, and the erosion of reality."},
+    {era:"2020s",title:"Artificial Intelligence",what:"Machines that reason, create, and act autonomously—the most powerful tool yet built.",promise:"Solving disease, climate, and complexity beyond human capacity.",peril:"Misaligned superintelligence, loss of control, and human obsolescence."}
   ];
+
+  const teamTopics=[[1,4],[3,5,6],[2,7],[0,8]];
+  const studentTeamByNumber={
+    1:4,2:1,3:1,4:1,5:2,6:3,7:1,8:3,9:3,10:4,
+    11:3,12:3,13:4,14:3,15:2,16:2,17:2,19:2,20:2,
+    21:1,22:2,23:1,24:4,25:4,26:4,27:1
+  };
+  function teamForInnovation(index){
+    return teamTopics.findIndex(topicIndexes=>topicIndexes.includes(index));
+  }
 
   // ========== Timeline render ==========
   (function(){
@@ -719,21 +758,73 @@
     });
   })();
 
-  // ========== Groups render ==========
+  // ========== Team render ==========
   (function(){
     const list=document.getElementById('group-list');
-    innovations.forEach((inv,i)=>{
-      const el=document.createElement('button');
+    teamTopics.forEach((topicIndexes,i)=>{
+      const el=document.createElement('article');
       el.className='group-row';
-      el.type='button';
-      el.setAttribute('aria-label',`Open ${inv.title} group details`);
       el.innerHTML=`
         <span class="group-badge">${i+1}</span>
-        <span class="group-topic">${inv.title}</span>
-        <span class="group-students">${inv.students}</span>
+        <span class="team-info">
+          <span class="group-topic">Team ${i+1}</span>
+          <span class="group-topics">${topicIndexes.map(index=>innovations[index].title).join(' · ')}</span>
+        </span>
+        <span class="group-students"><span class="team-count" data-team-count="${i+1}">—</span> / 7 students</span>
       `;
-      el.addEventListener('click',()=>{openModal(i);});
       list.appendChild(el);
+    });
+  })();
+
+  // ========== Fixed team assignment ==========
+  (function(){
+    const form=document.getElementById('assignmentForm');
+    const numberSelect=document.getElementById('studentNumber');
+    const assignButton=document.getElementById('assignTeam');
+    const status=document.getElementById('assignmentStatus');
+    const result=document.getElementById('assignmentResult');
+
+    for(let number=1;number<=27;number++){
+      if(number===18)continue;
+      const option=document.createElement('option');
+      option.value=number;
+      option.textContent='Student '+number;
+      numberSelect.appendChild(option);
+    }
+
+    const teamCounts=Array.from({length:teamTopics.length},()=>0);
+    Object.values(studentTeamByNumber).forEach(groupNumber=>{
+      if(!Number.isInteger(groupNumber)||groupNumber<1||groupNumber>teamTopics.length){
+        throw new Error('The student team mapping contains an invalid team number.');
+      }
+      teamCounts[groupNumber-1]++;
+    });
+    teamCounts.forEach((count,index)=>{
+      document.querySelector('[data-team-count="'+(index+1)+'"]').textContent=count;
+    });
+    assignButton.disabled=false;
+    status.textContent='Choose your student number to see your fixed team.';
+
+    form.addEventListener('submit',event=>{
+      event.preventDefault();
+      const studentNumber=Number(numberSelect.value);
+      if(!Number.isInteger(studentNumber)||studentNumber<1||studentNumber>27||studentNumber===18){
+        status.textContent='Choose a valid student number.';
+        status.classList.add('error');
+        return;
+      }
+      const groupNumber=studentTeamByNumber[studentNumber];
+      if(!Number.isInteger(groupNumber)){
+        status.textContent='No team assignment was found for that number. Ask your teacher for help.';
+        status.classList.add('error');
+        return;
+      }
+      status.classList.remove('error');
+      const title=document.createElement('strong');
+      title.textContent='You are on Team '+groupNumber;
+      result.replaceChildren(title,document.createTextNode(' — '+teamTopics[groupNumber-1].map(index=>innovations[index].title).join(', ')+'.'));
+      result.hidden=false;
+      status.textContent='Your assignment is fixed. Entering the same number always returns this team.';
     });
   })();
 
@@ -758,11 +849,12 @@
       returnFocus=document.activeElement;
       els.badge.textContent=i+1;
       els.title.textContent=inv.title;
-      els.sub.textContent=inv.era;
+      const teamNumber=teamForInnovation(i)+1;
+      els.sub.textContent=inv.era+' · Team '+teamNumber;
       els.what.textContent=inv.what;
       els.promise.textContent=inv.promise;
       els.peril.textContent=inv.peril;
-      els.students.textContent=inv.students;
+      els.students.textContent='Team '+teamNumber;
       backdrop.classList.add('open');
       backdrop.setAttribute('aria-hidden','false');
       document.body.style.overflow='hidden';
