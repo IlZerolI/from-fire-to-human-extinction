@@ -8,6 +8,8 @@ From mastery of fire to artificial intelligence, every breakthrough carries an e
 
 ## What's in this folder
 - `index.html` — the premium website (animated timeline, interactive groups, QR code)
+- `qrcode-generator.min.js` — locally bundled QR encoder (MIT licensed)
+- `qrcode-generator.LICENSE.txt` — QR encoder license
 - `GROUP_ASSIGNMENTS.md` — 9 groups of 3 students, each owning one innovation
 - `README.md` — this file
 - `From fire to human extinction.pptx` — the slide deck
@@ -28,14 +30,14 @@ From mastery of fire to artificial intelligence, every breakthrough carries an e
 - Animated particle background + entrance reveals
 - Interactive timeline with detail modals per innovation
 - Glassmorphism cards & premium dark theme
-- Client-side QR code generator (downloadable PNG)
+- Locally generated QR code for the live site, with PNG download and copy-link actions
 - Fully responsive, no build step required
 
 ## Edit the site
 Open `index.html` in any text editor. The `innovations` array at the bottom of the `<script>` drives the timeline and groups — edit titles, eras, descriptions, and student assignments there.
 
 ## QR code
-Generated in the browser from the current page URL. Click "Download QR" to save a PNG; on the deployed site, the QR code points to the live page.
+Generated in the browser from the canonical GitHub Pages URL using the bundled encoder; no third-party QR service is required. Use "Download PNG" to save the code or "Copy link" to copy the live URL.
 
 ## Deploy to GitHub Pages
 

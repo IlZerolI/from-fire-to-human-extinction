@@ -5,22 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>From Fire to Human Extinction</title>
 <meta name="description" content="Presentation companion site: the innovations that built civilisation&mdash;and how each could end it.">
+<meta name="theme-color" content="#070b12">
+<link rel="canonical" href="https://ilzeroli.github.io/from-fire-to-human-extinction/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* ========== Design tokens ========== */
   :root{
-    --bg:#f2efe8;
-    --paper:#ffffff;
-    --ink:#181610;
-    --muted:#6b655a;
-    --line:#d8d1c4;
-    --ember:#9a341e;
-    --ember-dark:#742517;
-    --ember-light:#f3e8e2;
-    --gold:#a87a33;
-    --ink-dim:#3a362f;
+    color-scheme:dark;
+    --bg:#070b12;
+    --paper:#0d141e;
+    --paper-raised:#121d29;
+    --ink:#edf5ff;
+    --muted:#94a3b8;
+    --line:#223246;
+    --ember:#ff794f;
+    --ember-dark:#ff9b77;
+    --ember-light:#18202a;
+    --gold:#ffd278;
+    --cyan:#62eee1;
+    --ink-dim:#a9bacd;
+    --ember-glow:rgba(255,121,79,0.32);
+    --cyan-glow:rgba(98,238,225,0.22);
     --radius:16px;
     --maxw:820px;
     --ease:cubic-bezier(0.25, 1, 0.5, 1);
@@ -29,9 +36,10 @@
   /* ========== Reset ========== */
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   body{
     font-family:'Inter',system-ui,-apple-system,sans-serif;
-    background:var(--bg);
+    background:linear-gradient(180deg,#0a1019 0%,var(--bg) 38%,#080d14 100%);
     color:var(--ink);
     line-height:1.72;
     -webkit-font-smoothing:antialiased;
@@ -39,7 +47,7 @@
   }
   a{color:var(--ember);text-decoration:none}
   a:hover{text-decoration:underline}
-  h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;font-weight:700;line-height:1.18}
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.18}
   p{margin:0 0 1.15rem}
   .container{max-width:var(--maxw);margin:0 auto;padding:0 26px}
 
@@ -48,44 +56,50 @@
     content:'';
     position:fixed;inset:-10%;
     background:
-      radial-gradient(900px circle at 25% 20%, rgba(154,52,30,0.06), transparent 50%),
-      radial-gradient(700px circle at 80% 85%, rgba(168,122,51,0.05), transparent 50%),
-      linear-gradient(180deg, rgba(0,0,0,0.01) 0%, transparent 55%, rgba(0,0,0,0.01) 100%);
+      radial-gradient(900px circle at 18% 9%,rgba(73,119,255,0.12),transparent 52%),
+      radial-gradient(760px circle at 83% 30%,rgba(98,238,225,0.08),transparent 48%),
+      radial-gradient(720px circle at 55% 93%,rgba(255,121,79,0.08),transparent 48%);
     z-index:-1;pointer-events:none;
+  }
+  body::after{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:0.16;
+    background-image:linear-gradient(rgba(119,160,197,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(119,160,197,0.12) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:linear-gradient(to bottom,black,transparent 86%);
   }
 
   /* ========== Header ========== */
   header{
     position:sticky;top:0;z-index:100;
     border-bottom:1px solid var(--line);
-    background:rgba(242,239,232,0.7);
-    backdrop-filter:blur(14px);
+    background:rgba(7,11,18,0.82);
+    backdrop-filter:blur(18px) saturate(140%);
     transition:box-shadow 0.3s;
   }
-  header.scrolled{box-shadow:0 4px 20px rgba(0,0,0,0.04)}
+  header.scrolled{box-shadow:0 8px 36px rgba(0,0,0,0.38),0 1px 0 var(--cyan-glow)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
   .brand{
-    font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:1.18rem;letter-spacing:0.03em;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.08rem;letter-spacing:0.01em;
     color:var(--ink);display:flex;align-items:center;gap:10px
   }
   .brand .separator{width:1px;height:14px;background:var(--line);opacity:0.6}
   .brand .ember{color:var(--ember)}
-  .nav-links{display:none;gap:32px;list-style:none;font-size:0.82rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase}
+  .nav-links{display:none;gap:32px;list-style:none;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase}
   .nav-links a{color:var(--ink-dim)}
-  .nav-links a:hover{color:var(--ember);text-decoration:none}
-  .menu-btn{background:none;border:1px solid var(--line);color:var(--ink);padding:7px 12px;border-radius:8px;cursor:pointer;font-size:1.2rem;display:block}
-  .menu-btn:hover{border-color:var(--ember);color:var(--ember)}
+  .nav-links a:hover{color:var(--cyan);text-decoration:none}
+  .menu-btn{background:var(--paper);border:1px solid var(--line);color:var(--ink);padding:7px 12px;border-radius:8px;cursor:pointer;font-size:1.2rem;display:block}
+  .menu-btn:hover{border-color:var(--cyan);color:var(--cyan)}
 
   /* ========== Flame motif (CSS drawn) ========== */
   .flame{
     position:relative;width:26px;height:34px;border-radius:50% 50% 45% 45%/60% 60% 40% 40%;
-    background:radial-gradient(circle at 40% 35%, #f7c948 0%, #e87a1e 45%, var(--ember) 90%);
-    filter:blur(1px);box-shadow:0 0 14px rgba(247,201,72,0.35)
+    background:radial-gradient(circle at 40% 35%,#fff0aa 0%,#ffb347 35%,var(--ember) 75%,#d73845 100%);
+    filter:blur(1px);box-shadow:0 0 14px rgba(255,121,79,0.35),0 0 32px var(--ember-glow)
   }
   .flame::after{
     content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
     width:14px;height:18px;border-radius:50% 50% 40% 40%/60% 60% 30% 30%;
-    background:rgba(255,255,255,0.55);filter:blur(2px)
+    background:rgba(255,255,255,0.7);filter:blur(2px)
   }
 
   /* ========== Hero ========== */
@@ -93,31 +107,32 @@
     padding:128px 26px 96px;
     text-align:center;
     border-bottom:1px solid var(--line);
-    background:linear-gradient(180deg, var(--paper) 0%, var(--bg) 100%);
+    background:radial-gradient(ellipse at 50% 0%,rgba(98,238,225,0.08),transparent 45%),linear-gradient(180deg,rgba(13,20,30,0.9) 0%,rgba(7,11,18,0.68) 100%);
     position:relative;overflow:hidden
   }
   .hero::after{
     content:'';position:absolute;inset:0;
-    background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><path d="M0 0h100v100H0z" fill="none"/><path d="M50 0L100 50L50 100L0 50Z" fill="%23d8d1c4" fill-opacity="0.04"/></svg>') repeat;
-    opacity:0.5;pointer-events:none
+    background:radial-gradient(ellipse at 50% 35%,transparent 0%,rgba(7,11,18,0.24) 72%);
+    opacity:1;pointer-events:none
   }
   .kicker{
     display:inline-flex;align-items:center;gap:12px;
     font-family:'Inter',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.4em;text-transform:uppercase;
-    color:var(--ember-dark);
-    border:1px solid rgba(154,52,30,0.18);
-    background:rgba(154,52,30,0.05);
+    color:var(--cyan);font-family:'IBM Plex Mono',monospace;
+    border:1px solid rgba(98,238,225,0.26);
+    background:rgba(98,238,225,0.06);
     padding:9px 20px;border-radius:50px;margin-bottom:24px
   }
-  .dot{width:8px;height:8px;background:var(--ember);border-radius:50%;box-shadow:0 0 10px rgba(154,52,30,0.6)}
+  .dot{width:8px;height:8px;background:var(--cyan);border-radius:50%;box-shadow:0 0 10px rgba(98,238,225,0.75);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{50%{box-shadow:0 0 20px rgba(98,238,225,0.95);opacity:0.62}}
   .hero h1{
-    font-family:'Playfair Display',Georgia,serif;font-weight:900;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;
     font-size:clamp(2.8rem,7.5vw,5.6rem);line-height:1.02;letter-spacing:-0.03em;
-    margin-bottom:24px;
+    margin-bottom:24px;text-shadow:0 0 54px rgba(98,238,225,0.08)
   }
-  .hero h1 .ash{color:var(--ink-dim);font-weight:400}
+  .hero h1 .ash{color:var(--cyan);font-weight:500}
   .subhead{
-    font-size:1.2rem;color:var(--muted);max-width:660px;margin:0 auto 42px;line-height:1.95;font-weight:400;
+    font-size:1.1rem;color:var(--muted);max-width:660px;margin:0 auto 42px;line-height:1.95;font-weight:400;
   }
   .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
@@ -129,19 +144,20 @@
     cursor:pointer;transition:all 0.28s ease;border:1px solid transparent
   }
   .btn:active{transform:scale(0.96)}
-  .btn-primary{background:var(--ember);color:#fff;box-shadow:0 6px 18px rgba(154,52,30,0.28)}
-  .btn-primary:hover{background:var(--ember-dark);transform:translateY(-2px);box-shadow:0 10px 26px rgba(154,52,30,0.38)}
+  .btn-primary{background:var(--ember);color:#10141a;box-shadow:0 0 24px rgba(255,121,79,0.2)}
+  .btn-primary:hover{background:#ff936d;transform:translateY(-2px);box-shadow:0 0 32px rgba(255,121,79,0.36)}
   .btn-outline{background:transparent;border-color:var(--line);color:var(--ink)}
-  .btn-outline:hover{border-color:var(--ink);color:var(--ink);transform:translateY(-2px)}
+  .btn-outline:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);box-shadow:0 0 22px var(--cyan-glow)}
   .btn-ghost{background:transparent;color:var(--muted)}
-  .btn-ghost:hover{color:var(--ember)}
+  .btn-ghost:hover{color:var(--cyan)}
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
 
   /* ========== Sections ========== */
   section{padding:86px 26px}
   .section-head{text-align:center;margin-bottom:72px}
   .section-head .eyebrow{
     font-family:'Inter',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.32em;text-transform:uppercase;
-    color:var(--ember);display:block;margin-bottom:16px
+    color:var(--cyan);font-family:'IBM Plex Mono',monospace;display:block;margin-bottom:16px
   }
   .section-head h2{font-size:2.7rem;margin-bottom:18px;letter-spacing:-0.015em}
   .section-head p{color:var(--muted);font-size:1.18rem;max-width:620px;margin:0 auto;font-weight:400}
@@ -159,19 +175,19 @@
   @media(min-width:640px){.grid-cols-2{grid-template-columns:repeat(2,1fr)}}
   @media(min-width:1024px){.grid-cols-3{grid-template-columns:repeat(3,1fr)}}
   .card{
-    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    background:linear-gradient(145deg,rgba(18,29,41,0.94),rgba(10,16,24,0.92));border:1px solid var(--line);border-radius:var(--radius);
     padding:30px;transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
     position:relative;overflow:hidden
   }
   .card::before{
     content:'';position:absolute;top:0;left:0;right:0;height:3px;
-    background:linear-gradient(90deg, transparent, var(--ember), transparent);opacity:0;transition:opacity 0.3s
+    background:linear-gradient(90deg,transparent,var(--cyan),var(--ember),transparent);opacity:0;transition:opacity 0.3s
   }
-  .card:hover{border-color:var(--muted);transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,0.07)}
+  .card:hover{border-color:rgba(98,238,225,0.56);transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,0.34),0 0 24px rgba(98,238,225,0.08)}
   .card:hover::before{opacity:1}
   .card-tag{
     font-family:'Inter',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.24em;text-transform:uppercase;
-    color:var(--ember-dark);display:block;margin-bottom:12px
+    color:var(--ember-dark);font-family:'IBM Plex Mono',monospace;display:block;margin-bottom:12px
   }
   .card h3{font-size:1.18rem;margin-bottom:12px}
   .card p{color:var(--muted);font-size:0.97rem}
@@ -179,31 +195,31 @@
     margin-top:16px;display:flex;align-items:flex-start;gap:10px;
     font-size:0.9rem;color:var(--ember-dark);border-top:1px solid var(--line);padding-top:13px
   }
-  .card .risk::before{content:'';width:8px;height:8px;background:var(--ember);border-radius:50%;margin-top:6px;flex-shrink:0;box-shadow:0 0 8px rgba(154,52,30,0.4)}
+  .card .risk::before{content:'';width:8px;height:8px;background:var(--ember);border-radius:50%;margin-top:6px;flex-shrink:0;box-shadow:0 0 8px var(--ember-glow)}
 
   /* ========== Pull quote ========== */
   .pullquote{
     position:relative;padding:40px 40px 40px 80px;margin:64px 0;
-    background:var(--paper);border-left:4px solid var(--ember);border-radius:0 var(--radius) var(--radius) 0;
-    font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:1.5rem;line-height:1.5;
-    color:var(--ink);box-shadow:0 12px 40px rgba(0,0,0,0.06)
+    background:linear-gradient(110deg,rgba(18,29,41,0.96),rgba(10,16,24,0.96));border-left:3px solid var(--cyan);border-radius:0 var(--radius) var(--radius) 0;
+    font-family:'Space Grotesk',sans-serif;font-style:normal;font-size:1.42rem;line-height:1.5;
+    color:var(--ink);box-shadow:0 12px 40px rgba(0,0,0,0.24),inset 0 0 40px rgba(98,238,225,0.025)
   }
   .pullquote::before{
     content:'\201C';position:absolute;top:12px;left:24px;
-    font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:4rem;color:rgba(154,52,30,0.12);line-height:1
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:4rem;color:rgba(98,238,225,0.18);line-height:1
   }
-  .pullquote cite{display:block;margin-top:16px;font-family:'Inter',sans-serif;font-weight:600;font-size:0.85rem;font-style:normal;color:var(--muted);text-transform:uppercase;letter-spacing:0.14em}
+  .pullquote cite{display:block;margin-top:16px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:0.75rem;font-style:normal;color:var(--cyan);text-transform:uppercase;letter-spacing:0.14em}
 
   /* ========== Timeline ========== */
   .timeline{position:relative;padding:56px 0}
   .timeline::before{
-    content:'';position:absolute;left:26px;top:0;bottom:0;width:1px;background:var(--line)
+    content:'';position:absolute;left:26px;top:0;bottom:0;width:1px;background:linear-gradient(var(--line),var(--cyan),var(--line))
   }
   .tl-item{position:relative;padding-left:76px;margin-bottom:76px;opacity:0;transform:translateY(38px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
   .tl-item.visible{opacity:1;transform:none}
   .tl-item::before{
-    content:'';position:absolute;left:22px;top:3px;width:12px;height:12px;background:var(--ember);
-    border:4px solid var(--paper);border-radius:50%;z-index:2;box-shadow:0 0 0 4px var(--ember-glow),0 0 16px rgba(154,52,30,0.25)
+    content:'';position:absolute;left:22px;top:3px;width:12px;height:12px;background:var(--cyan);
+    border:3px solid var(--bg);border-radius:50%;z-index:2;box-shadow:0 0 0 3px var(--cyan-glow),0 0 18px rgba(98,238,225,0.34)
   }
   .tl-item::after{
     content:'';position:absolute;left:25px;top:16px;width:1px;height:calc(100% - 14px);background:var(--line);z-index:1
@@ -212,9 +228,9 @@
   .tl-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}
   .tl-year{
     font-family:'Inter',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;
-    color:var(--ember-dark);display:block;margin-bottom:2px;min-width:88px
+    color:var(--cyan);font-family:'IBM Plex Mono',monospace;display:block;margin-bottom:2px;min-width:88px
   }
-  .tl-title{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;margin-bottom:0}
+  .tl-title{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;margin-bottom:0}
   .tl-desc{color:var(--muted);font-size:0.97rem;margin-bottom:14px;line-height:1.8}
   .tl-btn{
     display:inline-flex;align-items:center;gap:7px;background:none;border:none;
@@ -233,19 +249,20 @@
 
   /* ========== Groups ========== */
   .groups-wrap{
-    background:var(--paper);border:1px solid var(--line);border-radius:24px;
-    padding:56px 30px;position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.05)
+    background:radial-gradient(ellipse at 50% 0%,rgba(98,238,225,0.04),transparent 58%),linear-gradient(145deg,rgba(18,29,41,0.94),rgba(10,16,24,0.96));
+    border:1px solid var(--line);border-radius:24px;
+    padding:56px 30px;position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.3)
   }
   .group-list{display:grid;gap:16px}
   .group-row{
     display:flex;align-items:center;gap:20px;padding:22px 24px;
-    background:#fff;border:1px solid var(--line);border-radius:14px;transition:border-color 0.25s,box-shadow 0.25s,transform 0.25s
+    background:rgba(7,11,18,0.62);border:1px solid var(--line);border-radius:14px;transition:border-color 0.25s,box-shadow 0.25s,transform 0.25s
   }
-  .group-row:hover{border-color:var(--ember);box-shadow:0 12px 32px rgba(154,52,30,0.08);transform:translateX(-3px)}
+  .group-row:hover{border-color:var(--cyan);box-shadow:0 12px 32px rgba(98,238,225,0.1);transform:translateX(-3px)}
   .group-badge{
-    width:46px;height:46px;border-radius:50%;background:rgba(154,52,30,0.07);
-    color:var(--ember-dark);font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:1.2rem;
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 4px rgba(255,255,255,0.6)
+    width:46px;height:46px;border-radius:50%;background:rgba(98,238,225,0.08);
+    color:var(--cyan);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 4px var(--paper)
   }
   .group-topic{font-weight:700;color:var(--ink);flex:1}
   .group-students{color:var(--muted);font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;white-space:nowrap}
@@ -253,44 +270,55 @@
 
   /* ========== QR ========== */
   .qr-wrap{
-    text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:24px;
-    padding:60px 30px;box-shadow:0 20px 50px rgba(0,0,0,0.04)
+    text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(98,238,225,0.1),transparent 56%),linear-gradient(145deg,var(--paper-raised),var(--paper));
+    border:1px solid rgba(98,238,225,0.22);border-radius:24px;
+    padding:60px 30px;box-shadow:0 20px 50px rgba(0,0,0,0.32),0 0 48px rgba(98,238,225,0.045)
   }
+  .qr-kicker{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--cyan)}
   .qr-frame{
     display:inline-flex;flex-direction:column;align-items:center;gap:14px;
-    padding:26px;background:var(--ember-light);border:1px solid rgba(154,52,30,0.15);
-    border-radius:16px;box-shadow:0 12px 36px rgba(154,52,30,0.12)
+    padding:18px;background:rgba(6,10,16,0.72);border:1px solid rgba(98,238,225,0.3);
+    border-radius:18px;box-shadow:0 0 32px rgba(98,238,225,0.09),inset 0 0 28px rgba(98,238,225,0.025)
   }
-  #qrcode{margin:0}
-  .qr-note{color:var(--muted);font-size:0.96rem;max-width:620px;margin:0 auto 28px}
+  #qrcode{display:block;width:308px;max-width:100%;margin:0 auto;background:#f2f8ff;border:1px solid rgba(98,238,225,0.38);border-radius:12px;box-shadow:0 0 24px rgba(98,238,225,0.16)}
+  #qrcode canvas{display:block;width:100%;height:auto;border-radius:11px}
+  .qr-url{display:block;width:min(100%,520px);min-height:48px;margin:22px auto 16px;padding:12px 14px;resize:none;overflow-wrap:anywhere;white-space:pre-wrap;text-align:center;background:rgba(6,10,16,0.72);border:1px solid var(--line);border-radius:10px;color:var(--cyan);font:0.8rem/1.5 'IBM Plex Mono',monospace;letter-spacing:0.01em}
+  .qr-status{min-height:1.5em;color:var(--cyan);font:0.78rem 'IBM Plex Mono',monospace}
+  .qr-note{color:var(--muted);font-size:0.9rem;max-width:620px;margin:0 auto 24px}
   .qr-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .btn:disabled{opacity:0.5;cursor:wait;transform:none;box-shadow:none}
+  @media(max-width:480px){
+    .qr-wrap{padding:42px 18px}
+    .qr-frame{width:min(100%,340px);padding:14px}
+    .qr-url{font-size:0.68rem}
+  }
 
   /* ========== Footer ========== */
   footer{border-top:1px solid var(--line);padding:60px 26px;text-align:center;color:var(--muted);font-size:0.85rem}
-  .footer-line{color:var(--ink);font-weight:600;margin-bottom:10px;font-size:1rem}
-  .footer-line .ember{color:var(--ember)}
-  .footer-meta{display:flex;gap:20px;justify-content:center;font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;color:#a8a194;margin-top:14px}
+  .footer-line{color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:10px;font-size:1rem}
+  .footer-line .ember{color:var(--cyan)}
+  .footer-meta{display:flex;gap:20px;justify-content:center;font:0.68rem 'IBM Plex Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:14px;flex-wrap:wrap}
 
   /* ========== Modal ========== */
   .backdrop{
-    position:fixed;inset:0;background:rgba(14,12,8,0.55);z-index:100;
+    position:fixed;inset:0;background:rgba(2,5,9,0.78);z-index:100;
     opacity:0;pointer-events:none;transition:opacity 0.35s;backdrop-filter:blur(10px)
   }
   .backdrop.open{opacity:1;pointer-events:auto}
   .modal{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.94);
-    width:90%;max-width:740px;max-height:92vh;background:#fff;border:1px solid var(--line);
-    border-radius:22px;padding:42px;overflow-y:auto;z-index:101;
+    width:90%;max-width:740px;max-height:92vh;background:linear-gradient(145deg,var(--paper-raised),var(--paper));border:1px solid var(--line);
+    border-radius:22px;padding:42px;overflow-y:auto;z-index:101;box-shadow:0 24px 90px rgba(0,0,0,0.6),0 0 40px rgba(98,238,225,0.06)
     opacity:0;transform:translate(-50%,-50%) scale(0.91);transition:opacity 0.35s,transform 0.35s
   }
   .backdrop.open .modal{opacity:1;transform:translate(-50%,-50%) scale(1)}
   .modal-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:18px}
   .badge{
-    width:52px;height:52px;border-radius:50%;background:rgba(154,52,30,0.08);
-    color:var(--ember-dark);font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:1.3rem;
+    width:52px;height:52px;border-radius:50%;background:rgba(98,238,225,0.08);
+    color:var(--cyan);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;
     display:flex;align-items:center;justify-content:center;flex-shrink:0
   }
-  .modal-title{font-family:'Playfair Display',Georgia,serif;font-size:2.2rem;margin-bottom:6px;letter-spacing:-0.01em}
+  .modal-title{font-family:'Space Grotesk',sans-serif;font-size:2.2rem;margin-bottom:6px;letter-spacing:-0.01em}
   .modal-sub{font-size:0.95rem;color:var(--muted)}
   .close-btn{
     position:absolute;top:22px;right:24px;background:none;border:none;color:var(--muted);
@@ -316,6 +344,7 @@
   }
 
   @media(min-width:768px){.nav-links{display:flex}.menu-btn{display:none}}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
 </style>
 </head>
 <body>
@@ -414,15 +443,18 @@
   <div class="container">
     <div class="qr-wrap">
       <div class="qr-frame">
-        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:0.75rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--ember-dark)">Scan to visit</div>
-        <div id="qrcode"></div>
+        <div class="qr-kicker">Scan to connect</div>
+        <div id="qrcode" role="img" aria-label="QR code for the live website"></div>
       </div>
-      <p class="qr-note">Open this site on your phone. The QR code links to your live GitHub Pages URL.</p>
+      <p class="qr-note">Point your camera at the code to open the live experience.</p>
+      <label class="sr-only" for="qrUrl">Live website URL</label>
+      <textarea class="qr-url" id="qrUrl" rows="2" readonly></textarea>
+      <p class="qr-status" id="qrStatus" role="status" aria-live="polite">Generating secure link…</p>
       <div class="qr-actions">
-        <button class="btn btn-outline" id="dlQr">Download QR</button>
-        <a href="#" class="btn btn-ghost" id="qrUrl">Copy URL</a>
+        <button class="btn btn-primary" id="dlQr" disabled>Download PNG</button>
+        <button class="btn btn-outline" id="copyQrUrl">Copy link</button>
+        <a class="btn btn-ghost" id="openSite" target="_blank" rel="noopener noreferrer">Open site</a>
       </div>
-      <p class="qr-note" style="margin-top:26px;font-size:0.78rem;">Replace the URL logic in script.js with your GitHub Pages link after deploying.</p>
     </div>
   </div>
 </section>
@@ -431,7 +463,7 @@
   <div class="container">
     <div class="footer-line">From Fire<span class="ember">to Human Extinction</span> &bull; Class Presentation</div>
     <div>27 students &middot; 9 groups &middot; Innovations &amp; existential risk</div>
-    <div class="footer-meta"><span>GitHub Pages</span><span>Single-file site</span><span>No build step</span></div>
+    <div class="footer-meta"><span>GitHub Pages</span><span>Self-hosted QR</span><span>No build step</span></div>
   </div>
 </footer>
 
@@ -465,6 +497,7 @@
   </div>
 </div>
 
+<script src="qrcode-generator.min.js"></script>
 <script>
   // ========== Header scroll state ==========
   (function(){
@@ -561,15 +594,78 @@
 
   // ========== QR Code ==========
   (function(){
-    const pageUrl=window.location.origin+window.location.pathname;
+    const pageUrl=document.querySelector('link[rel="canonical"]').href;
     const qrEl=document.getElementById('qrcode');
     const urlEl=document.getElementById('qrUrl');
     const dlBtn=document.getElementById('dlQr');
-    urlEl.textContent=pageUrl;urlEl.href=pageUrl;
-    const qrImgSrc='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl='+encodeURIComponent(pageUrl)+'&choe=UTF-8';
-    qrEl.innerHTML='<img src="'+qrImgSrc+'" alt="QR Code" style="width:270px;height:270px;display:block;margin:0 auto;border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,0.14);">';
+    const copyBtn=document.getElementById('copyQrUrl');
+    const openLink=document.getElementById('openSite');
+    const status=document.getElementById('qrStatus');
+    urlEl.value=pageUrl;
+    openLink.href=pageUrl;
+    let canvas;
+
+    try{
+      if(typeof qrcode!=='function')throw new Error('QR generator failed to load.');
+      const code=qrcode(0,'H');
+      code.addData(pageUrl);
+      code.make();
+      const count=code.getModuleCount();
+      const quietZone=4;
+      const pixelSize=560;
+      const moduleSize=pixelSize/(count+quietZone*2);
+      canvas=document.createElement('canvas');
+      canvas.width=pixelSize;canvas.height=pixelSize;
+      canvas.setAttribute('aria-label','QR code linking to '+pageUrl);
+      const context=canvas.getContext('2d');
+      context.fillStyle='#f2f8ff';
+      context.fillRect(0,0,pixelSize,pixelSize);
+      context.fillStyle='#07111c';
+      for(let row=0;row<count;row++){
+        for(let column=0;column<count;column++){
+          if(!code.isDark(row,column))continue;
+          const x=Math.round((column+quietZone)*moduleSize);
+          const y=Math.round((row+quietZone)*moduleSize);
+          const right=Math.round((column+quietZone+1)*moduleSize);
+          const bottom=Math.round((row+quietZone+1)*moduleSize);
+          context.fillRect(x,y,right-x,bottom-y);
+        }
+      }
+      qrEl.replaceChildren(canvas);
+      status.textContent='Signal ready — points to the live site.';
+      dlBtn.disabled=false;
+    }catch(error){
+      status.textContent='QR code unavailable: '+error.message;
+      console.error('QR generation failed:',error);
+    }
+
     dlBtn.addEventListener('click',()=>{
-      const a=document.createElement('a');a.download='qr-code.png';a.href=qrImgSrc;a.click();
+      if(!canvas)return;
+      try{
+        const link=document.createElement('a');
+        link.download='from-fire-to-human-extinction-qr.png';
+        link.href=canvas.toDataURL('image/png');
+        link.click();
+        status.textContent='QR PNG downloaded.';
+      }catch(error){
+        status.textContent='Download failed: '+error.message;
+        console.error('QR download failed:',error);
+      }
+    });
+    copyBtn.addEventListener('click',async()=>{
+      if(!navigator.clipboard||!navigator.clipboard.writeText){
+        urlEl.focus();urlEl.select();
+        status.textContent='Clipboard unavailable — the link is selected for copying.';
+        return;
+      }
+      try{
+        await navigator.clipboard.writeText(pageUrl);
+        status.textContent='Live link copied to clipboard.';
+      }catch(error){
+        urlEl.focus();urlEl.select();
+        status.textContent='Clipboard access denied — the link is selected for copying.';
+        console.error('Copying the live link failed:',error);
+      }
     });
   })();
 
@@ -590,9 +686,9 @@
       links.style.display=open?'none':'flex';
       links.style.flexDirection='column';
       links.style.position='absolute';links.style.top='72px';links.style.right='26px';
-      links.style.background='#fff';links.style.border='1px solid var(--line)';
+      links.style.background='var(--paper)';links.style.border='1px solid var(--line)';
       links.style.borderRadius='16px';links.style.padding='24px';
-      links.style.boxShadow='0 16px 48px rgba(0,0,0,0.08)'
+      links.style.boxShadow='0 16px 48px rgba(0,0,0,0.48)'
     });
   })();
 </script>
