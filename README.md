@@ -35,21 +35,16 @@ From mastery of fire to artificial intelligence, every breakthrough carries an e
 Open `index.html` in any text editor. The `innovations` array at the bottom of the `<script>` drives the timeline and groups — edit titles, eras, descriptions, and student assignments there.
 
 ## QR code
-Generated client-side from the live page URL. Click "Download QR" to save a PNG. Replace the URL logic in script.js with your GitHub Pages link after deploying.
+Generated in the browser from the current page URL. Click "Download QR" to save a PNG; on the deployed site, the QR code points to the live page.
 
 ## Deploy to GitHub Pages
 
-```powershell
-git init
-git add .
-git commit -m "Add premium presentation website"
-git branch -M main
-git remote add origin https://github.com/<yourusername>/from-fire-to-human-extinction.git
-git push -u origin main
-```
+The site is published from the `main` branch and repository root:
 
-Then in GitHub **Settings → Pages**: source = `main`, folder = `/ (root)`.
-Site goes live at `https://<yourusername>.github.io/from-fire-to-human-extinction/`.
+- Site: https://ilzeroli.github.io/from-fire-to-human-extinction/
+- Repository: https://github.com/IlZerolI/from-fire-to-human-extinction
+
+Push changes to `main` to publish an updated version.
 
 ## View locally
 Open `index.html` in your browser. No build step or server required.
