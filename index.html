@@ -10,12 +10,12 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --bg: #0b0c10;
-    --card: #15171f;
+    --bg: #0a0a0b;
+    --card: #121214;
     --text: #e8eaed;
     --muted: #9aa0a6;
-    --accent: #ff6b35;
-    --accent2: #f7931e;
+    --accent: #ff3b30;
+    --accent2: #ff6b35;
     --border: #24262f;
   }
   html { scroll-behavior: smooth; }
@@ -33,7 +33,7 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(11, 12, 16, 0.8);
+    background: rgba(10, 10, 11, 0.8);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
   }
@@ -76,37 +76,37 @@
   .menu-btn:hover { border-color: var(--accent); }
 
   .hero {
-    padding: 72px 20px 48px;
+    padding: 80px 20px 56px;
     text-align: center;
   }
   .kicker {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 12px;
-    background: rgba(255, 107, 53, 0.12);
-    border: 1px solid rgba(255, 107, 53, 0.35);
+    padding: 6px 14px;
+    background: rgba(255, 59, 48, 0.12);
+    border: 1px solid rgba(255, 59, 48, 0.35);
     color: var(--accent);
     font-size: 0.85rem;
     font-weight: 600;
     border-radius: 999px;
-    margin-bottom: 16px;
-    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
   h1 {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(2.4rem, 5vw, 4rem);
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.05;
     margin-bottom: 20px;
     letter-spacing: -0.03em;
   }
   h1 .glow { color: var(--accent); }
   .subtitle {
-    font-size: clamp(1rem, 1.2vw, 1.25rem);
+    font-size: clamp(1.05rem, 1.3vw, 1.35rem);
     color: var(--muted);
-    max-width: 620px;
-    margin: 0 auto 32px;
+    max-width: 640px;
+    margin: 0 auto 36px;
     font-weight: 400;
   }
   .hero-actions {
@@ -142,10 +142,10 @@
   section { padding: 64px 20px; }
   .section-head {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 44px;
   }
   .section-head h2 {
-    font-size: clamp(1.5rem, 2vw, 2rem);
+    font-size: clamp(1.6rem, 2.2vw, 2.1rem);
     font-weight: 800;
     margin-bottom: 10px;
     letter-spacing: -0.02em;
@@ -183,7 +183,7 @@
   .tl-item {
     position: relative;
     width: 100%;
-    padding: 0 40px 40px;
+    padding: 0 40px 44px;
   }
   .tl-item::after {
     content: '';
@@ -195,26 +195,64 @@
     border: 3px solid var(--bg);
     border-radius: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 0 0 4px var(--card);
+    box-shadow: 0 0 0 5px var(--card);
   }
   .tl-content {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 20px;
+    padding: 22px;
     position: relative;
   }
   .tl-year {
-    font-size: 0.8rem; font-weight: 800; color: var(--accent);
-    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;
+    font-size: 0.75rem; font-weight: 800; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;
+    display: block;
   }
   .tl-title { font-weight: 700; margin-bottom: 6px; color: var(--text); }
-  .tl-desc { font-size: 0.9rem; color: var(--muted); }
+  .tl-desc { font-size: 0.92rem; color: var(--muted); }
+  .tl-risk {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 600;
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+  }
   @media (max-width: 768px) {
     .timeline::before { left: 24px; }
-    .tl-item { padding: 0 0 40px 52px; }
+    .tl-item { padding: 0 0 44px 56px; }
     .tl-item::after { left: 24px; transform: none; }
   }
+
+  .groups {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 20px;
+  }
+  .group-list { display: grid; gap: 14px; }
+  .group-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: #0b0c0d;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .group-badge {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .group-topic { font-weight: 600; color: var(--text); flex: 1; }
+  .group-students { color: var(--muted); font-size: 0.85rem; }
 
   .qr-section {
     text-align: center;
@@ -224,7 +262,7 @@
     padding: 40px 20px;
   }
   #qrcode { margin: 0 auto 16px; }
-  .qr-note { color: var(--muted); font-size: 0.9rem; max-width: 520px; margin: 0 auto; }
+  .qr-note { color: var(--muted); font-size: 0.9rem; max-width: 560px; margin: 0 auto; }
 
   footer {
     padding: 40px 20px;
@@ -233,7 +271,7 @@
     color: var(--muted);
     font-size: 0.85rem;
   }
-  .group { margin-bottom: 6px; font-size: 0.9rem; color: var(--text); font-weight: 500; }
+  .group-line { margin-bottom: 6px; font-size: 0.9rem; color: var(--text); font-weight: 500; }
 
   @media (min-width: 768px) {
     .nav-links { display: flex; }
@@ -248,7 +286,8 @@
     <div class="brand">From Fire to Human<span>Extinction</span></div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
-      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#timeline">Innovations</a></li>
+      <li><a href="#groups">Class Groups</a></li>
       <li><a href="#qr">QR Code</a></li>
     </ul>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu">&#9776;</button>
@@ -257,12 +296,13 @@
 
 <section class="hero">
   <div class="container">
-    <div class="kicker">Group Project &bull; Presentation Companion</div>
+    <div class="kicker">Class Presentation &bull; Group Project</div>
     <h1>From Fire to Human<span class="glow">Extinction</span></h1>
-    <p class="subtitle">A presentation on humanity's journey &mdash; from the discovery of fire to the existential challenges we face today.</p>
+    <p class="subtitle">Every major innovation moved humanity forward &mdash; and every one carries the seed of how we might end. From mastering fire to artificial intelligence, we trace the tools that built civilisation and the risks they now pose.</p>
     <div class="hero-actions">
-      <a href="#qr" class="btn btn-primary">View QR Code</a>
-      <a href="#timeline" class="btn btn-outline">Explore Timeline</a>
+      <a href="#timeline" class="btn btn-primary">Explore Innovations</a>
+      <a href="#groups" class="btn btn-outline">Class Groups</a>
+      <a href="#qr" class="btn btn-outline">View QR Code</a>
     </div>
   </div>
 </section>
@@ -270,25 +310,25 @@
 <section id="about">
   <div class="container">
     <div class="section-head">
-      <h2>About This Presentation</h2>
-      <p>Explore the arc of human history &mdash; how mastery over fire sparked civilisation, and where our choices may lead us next.</p>
+      <h2>The Premise</h2>
+      <p>Innovation is what made us dominant. It may also be what undoes us.</p>
     </div>
     <div class="grid grid-cols-2">
       <div class="card">
-        <h3>Origin</h3>
-        <p>How fire shaped early human evolution, diet, and society.</p>
+        <h3>Progress</h3>
+        <p>Fire, agriculture, industry, computing &mdash; each breakthrough expanded what humans could do.</p>
       </div>
       <div class="card">
-        <h3>Civilisation</h3>
-        <p>From agriculture and industry to the modern age.</p>
+        <h3>Risk</h3>
+        <p>Nuclear weapons, climate change, engineered pathogens, misaligned AI &mdash; the same ingenuity turned inward.</p>
       </div>
       <div class="card">
-        <h3>Risks</h3>
-        <p>Existential threats facing humanity today and tomorrow.</p>
+        <h3>Choice</h3>
+        <p>The next century decides whether we survive our own inventions or become extinct by them.</p>
       </div>
       <div class="card">
-        <h3>Future</h3>
-        <p>Choices that determine whether we endure or fade.</p>
+        <h3>27 Students</h3>
+        <p>Nine groups of three. Each group owns one innovation &mdash; its promise and its peril.</p>
       </div>
     </div>
   </div>
@@ -297,46 +337,140 @@
 <section id="timeline">
   <div class="container">
     <div class="section-head">
-      <h2>Timeline</h2>
-      <p>Key milestones from fire to the present day.</p>
+      <h2>Innovations &mdash; Promise and Peril</h2>
+      <p>Nine breakthroughs, from fire to AI. Each group presents one.</p>
     </div>
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-content">
-          <div class="tl-year">Prehistory</div>
+          <span class="tl-year">Prehistory</span>
           <div class="tl-title">Mastery of Fire</div>
-          <div class="tl-desc">Early humans learn to control fire &mdash; warmth, protection, cooked food, and longer days.</div>
+          <div class="tl-desc">Warmth, protection, cooked food, longer days. The first technology that separated humans from other animals.</div>
+          <div class="tl-risk">Risk today: uncontrolled fire &mdash; wildfires, arson, accidental catastrophe.</div>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-content">
-          <div class="tl-year">~10,000 BCE</div>
+          <span class="tl-year">~10,000 BCE</span>
           <div class="tl-title">Agriculture</div>
-          <div class="tl-desc">Settled farming begins, populations grow, and the first civilisations emerge.</div>
+          <div class="tl-desc">Settled farming, surplus food, cities, and civilisation. More calories, denser populations.</div>
+          <div class="tl-risk">Risk today: industrial farming, soil collapse, pesticide-driven ecosystem failure.</div>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-content">
-          <div class="tl-year">1760&ndash;1840</div>
-          <div class="tl-title">Industrial Revolution</div>
-          <div class="tl-desc">Fossil fuels power rapid technological and economic change.</div>
+          <span class="tl-year">~1440 CE</span>
+          <div class="tl-title">Printing Press</div>
+          <div class="tl-desc">Mass literacy, the scientific revolution, and the rapid spread of ideas across continents.</div>
+          <div class="tl-risk">Risk today: information overload, propaganda, and the collapse of shared truth.</div>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-content">
-          <div class="tl-year">1945</div>
-          <div class="tl-title">Nuclear Age</div>
-          <div class="tl-desc">Humans gain the power to end civilisation in hours.</div>
+          <span class="tl-year">1760&ndash;1840</span>
+          <div class="tl-title">Steam Engine</div>
+          <div class="tl-desc">The Industrial Revolution begins. Mechanised production, trains, and the fossil-fuel economy.</div>
+          <div class="tl-risk">Risk today: coal and oil burning &mdash; the root of anthropogenic climate change.</div>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-content">
-          <div class="tl-year">Today</div>
-          <div class="tl-title">Existential Crossroads</div>
-          <div class="tl-desc">Climate, AI, biotechnology &mdash; our choices shape survival or extinction.</div>
+          <span class="tl-year">1945</span>
+          <div class="tl-title">Nuclear Fission</div>
+          <div class="tl-desc">The atomic bomb. For the first time, humans could end civilisation in hours.</div>
+          <div class="tl-risk">Risk today: nuclear war, accidental launch, and proliferation of weapons-grade material.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <span class="tl-year">1947</span>
+          <div class="tl-title">The Transistor</div>
+          <div class="tl-desc">The building block of modern electronics &mdash; computers, phones, and the digital age.</div>
+          <div class="tl-risk">Risk today: automated warfare, mass surveillance, and digital infrastructure collapse.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <span class="tl-year">1973</span>
+          <div class="tl-title">Recombinant DNA</div>
+          <div class="tl-desc">Genetic engineering begins. Editing genes to cure disease and improve crops.</div>
+          <div class="tl-risk">Risk today: engineered pathogens, lab leaks, and bioweapons more deadly than nature.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <span class="tl-year">1989</span>
+          <div class="tl-title">The World Wide Web</div>
+          <div class="tl-desc">Global, instant communication. All human knowledge connected at the speed of light.</div>
+          <div class="tl-risk">Risk today: cyberwar, AI-generated misinformation, and the erosion of reality.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <span class="tl-year">2020s</span>
+          <div class="tl-title">Artificial Intelligence</div>
+          <div class="tl-desc">Machines that reason, create, and act autonomously. The most powerful tool yet built.</div>
+          <div class="tl-risk">Risk today: misaligned superintelligence, loss of control, and human obsolescence.</div>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="groups" class="groups">
+  <div class="container">
+    <div class="section-head">
+      <h2>Class Groups</h2>
+      <p>27 students, 9 groups of 3. Each group owns one innovation.</p>
+    </div>
+    <div class="group-list">
+      <div class="group-row">
+        <div class="group-badge">1</div>
+        <div class="group-topic">Mastery of Fire</div>
+        <div class="group-students">Students 1, 2, 3</div>
+      </div>
+      <div class="group-row">
+        <div class="group-badge">2</div>
+        <div class="group-topic">Agriculture</div>
+        <div class="group-students">Students 4, 5, 6</div>
+      </div>
+      <div class="group-row">
+        <div class="group-badge">3</div>
+        <div class="group-topic">Printing Press</div>
+        <div class="group-students">Students 7, 8, 9</div>
+      </div>
+      <div class="group-row">
+        <div class="group-badge">4</div>
+        <div class="group-topic">Steam Engine</div>
+        <div class="group-students">Students 10, 11, 12</div>
+      </div>
+      <div class="group-row">
+        <div class="group-badge">5</div>
+        <div class="group-topic">Nuclear Fission</div>
+        <div class="group-students">Students 13, 14, 15</div>
+      </div>
+      <div class="group-row">
+        <div class="group-badge">6</div>
+        <div class="group-topic">The Transistor</div>
+        <div class="group-students">Students 16, 17, 18</div>
+      </div>
+      <div class="group-row">
+        <div class="group-badge">7</div>
+        <div class="group-topic">Recombinant DNA</div>
+        <div class="group-students">Students 19, 20, 21</div>
+      </div>
+      <div class="group-row">
+        <div class="group-badge">8</div>
+        <div class="group-topic">The World Wide Web</div>
+        <div class="group-students">Students 22, 23, 24</div>
+      </div>
+      <div class="group-row">
+        <div class="group-badge">9</div>
+        <div class="group-topic">Artificial Intelligence</div>
+        <div class="group-students">Students 25, 26, 27</div>
+      </div>
+    </div>
+    <p style="margin-top:18px; color: var(--muted); font-size: 0.9rem;">Each group covers: (1) what the innovation is, (2) how it advanced humanity, (3) how it could contribute to extinction, and (4) whether we can control it.</p>
   </div>
 </section>
 
@@ -344,34 +478,28 @@
   <div class="container">
     <h2>Scan to Visit</h2>
     <div id="qrcode"></div>
-    <p class="qr-note">Open this site on your phone. Replace <code>yourusername.github.io/from-fire-to-human-extinction</code> in script.js with your actual GitHub Pages URL.</p>
+    <p class="qr-note">Open this site on your phone. The QR code links to your live GitHub Pages URL (set it up once, then it updates automatically).</p>
   </div>
 </section>
 
 <footer>
   <div class="container">
-    <div class="group">Group Project &bull; From Fire to Human Extinction</div>
-    <div>Created alongside the class presentation &middot; Deployed on GitHub Pages</div>
+    <div class="group-line">From Fire to Human Extinction &bull; Class Presentation</div>
+    <div>27 students &middot; 9 groups &middot; Innovations &amp; existential risk</div>
+    <div>Deployed on GitHub Pages</div>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/qrcode.min.js"></script>
 <script>
   (function () {
-    // TODO: Replace with your actual GitHub Pages URL after enabling Pages
     const pageUrl = window.location.origin + window.location.pathname;
-
     QRCode.toCanvas(document.getElementById('qrcode'), {
       text: pageUrl,
       width: 260,
       margin: 2,
-      color: {
-        dark: '#000000',
-        light: '#ffffff'
-      }
-    }, function (error) {
-      if (error) console.error(error);
-    });
+      color: { dark: '#000000', light: '#ffffff' }
+    }, function (error) { if (error) console.error(error); });
 
     const btn = document.getElementById('menuBtn');
     const links = document.querySelector('.nav-links');
