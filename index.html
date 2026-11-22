@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Fire to Human Extinction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0b0c10;
+    --card: #15171f;
+    --text: #e8eaed;
+    --muted: #9aa0a6;
+    --accent: #ff6b35;
+    --accent2: #f7931e;
+    --border: #24262f;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(11, 12, 16, 0.8);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 16px;
+  }
+  .brand {
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .brand span { color: var(--accent); }
+  .nav-links {
+    display: none;
+    gap: 24px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .menu-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.25rem;
+    display: block;
+  }
+  .menu-btn:hover { border-color: var(--accent); }
+
+  .hero {
+    padding: 72px 20px 48px;
+    text-align: center;
+  }
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: rgba(255, 107, 53, 0.12);
+    border: 1px solid rgba(255, 107, 53, 0.35);
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 999px;
+    margin-bottom: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -0.03em;
+  }
+  h1 .glow { color: var(--accent); }
+  .subtitle {
+    font-size: clamp(1rem, 1.2vw, 1.25rem);
+    color: var(--muted);
+    max-width: 620px;
+    margin: 0 auto 32px;
+    font-weight: 400;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s, opacity 0.15s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover { border-color: var(--text); }
+
+  section { padding: 64px 20px; }
+  .section-head {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .section-head h2 {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .section-head p { color: var(--muted); font-size: 1rem; }
+
+  .grid { display: grid; gap: 20px; }
+  @media (min-width: 640px) { .grid-cols-2 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .grid-cols-3 { grid-template-columns: repeat(3, 1fr); } }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .card p { color: var(--muted); font-size: 0.95rem; }
+
+  .timeline {
+    position: relative;
+    padding: 40px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border);
+    transform: translateX(-50%);
+  }
+  .tl-item {
+    position: relative;
+    width: 100%;
+    padding: 0 40px 40px;
+  }
+  .tl-item::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 14px; height: 14px;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 0 4px var(--card);
+  }
+  .tl-content {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+  }
+  .tl-year {
+    font-size: 0.8rem; font-weight: 800; color: var(--accent);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .tl-title { font-weight: 700; margin-bottom: 6px; color: var(--text); }
+  .tl-desc { font-size: 0.9rem; color: var(--muted); }
+  @media (max-width: 768px) {
+    .timeline::before { left: 24px; }
+    .tl-item { padding: 0 0 40px 52px; }
+    .tl-item::after { left: 24px; transform: none; }
+  }
+
+  .qr-section {
+    text-align: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 20px;
+  }
+  #qrcode { margin: 0 auto 16px; }
+  .qr-note { color: var(--muted); font-size: 0.9rem; max-width: 520px; margin: 0 auto; }
+
+  footer {
+    padding: 40px 20px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .group { margin-bottom: 6px; font-size: 0.9rem; color: var(--text); font-weight: 500; }
+
+  @media (min-width: 768px) {
+    .nav-links { display: flex; }
+    .menu-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="brand">From Fire to Human<span>Extinction</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#qr">QR Code</a></li>
+    </ul>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="kicker">Group Project &bull; Presentation Companion</div>
+    <h1>From Fire to Human<span class="glow">Extinction</span></h1>
+    <p class="subtitle">A presentation on humanity's journey &mdash; from the discovery of fire to the existential challenges we face today.</p>
+    <div class="hero-actions">
+      <a href="#qr" class="btn btn-primary">View QR Code</a>
+      <a href="#timeline" class="btn btn-outline">Explore Timeline</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <h2>About This Presentation</h2>
+      <p>Explore the arc of human history &mdash; how mastery over fire sparked civilisation, and where our choices may lead us next.</p>
+    </div>
+    <div class="grid grid-cols-2">
+      <div class="card">
+        <h3>Origin</h3>
+        <p>How fire shaped early human evolution, diet, and society.</p>
+      </div>
+      <div class="card">
+        <h3>Civilisation</h3>
+        <p>From agriculture and industry to the modern age.</p>
+      </div>
+      <div class="card">
+        <h3>Risks</h3>
+        <p>Existential threats facing humanity today and tomorrow.</p>
+      </div>
+      <div class="card">
+        <h3>Future</h3>
+        <p>Choices that determine whether we endure or fade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="container">
+    <div class="section-head">
+      <h2>Timeline</h2>
+      <p>Key milestones from fire to the present day.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-year">Prehistory</div>
+          <div class="tl-title">Mastery of Fire</div>
+          <div class="tl-desc">Early humans learn to control fire &mdash; warmth, protection, cooked food, and longer days.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-year">~10,000 BCE</div>
+          <div class="tl-title">Agriculture</div>
+          <div class="tl-desc">Settled farming begins, populations grow, and the first civilisations emerge.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-year">1760&ndash;1840</div>
+          <div class="tl-title">Industrial Revolution</div>
+          <div class="tl-desc">Fossil fuels power rapid technological and economic change.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-year">1945</div>
+          <div class="tl-title">Nuclear Age</div>
+          <div class="tl-desc">Humans gain the power to end civilisation in hours.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-year">Today</div>
+          <div class="tl-title">Existential Crossroads</div>
+          <div class="tl-desc">Climate, AI, biotechnology &mdash; our choices shape survival or extinction.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="qr" class="qr-section">
+  <div class="container">
+    <h2>Scan to Visit</h2>
+    <div id="qrcode"></div>
+    <p class="qr-note">Open this site on your phone. Replace <code>yourusername.github.io/from-fire-to-human-extinction</code> in script.js with your actual GitHub Pages URL.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="group">Group Project &bull; From Fire to Human Extinction</div>
+    <div>Created alongside the class presentation &middot; Deployed on GitHub Pages</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/qrcode.min.js"></script>
+<script>
+  (function () {
+    // TODO: Replace with your actual GitHub Pages URL after enabling Pages
+    const pageUrl = window.location.origin + window.location.pathname;
+
+    QRCode.toCanvas(document.getElementById('qrcode'), {
+      text: pageUrl,
+      width: 260,
+      margin: 2,
+      color: {
+        dark: '#000000',
+        light: '#ffffff'
+      }
+    }, function (error) {
+      if (error) console.error(error);
+    });
+
+    const btn = document.getElementById('menuBtn');
+    const links = document.querySelector('.nav-links');
+    btn.addEventListener('click', function () {
+      const open = links.style.display === 'flex';
+      links.style.display = open ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '64px';
+      links.style.right = '20px';
+      links.style.background = 'var(--card)';
+      links.style.border = '1px solid var(--border)';
+      links.style.borderRadius = '10px';
+      links.style.padding = '16px';
+    });
+  })();
+</script>
+
+</body>
+</html>
