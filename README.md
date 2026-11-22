@@ -1,6 +1,6 @@
 # From Fire to Human Extinction
 
-Presentation companion website for an 18-number class roster, exploring innovations that built civilisation and how they could threaten it. Student 18 is excluded, leaving 17 assigned students.
+Presentation companion website for a 28-number class roster, exploring innovations that built civilisation and how they could threaten it. Student 18 is excluded, leaving 27 assigned students.
 
 ## Project files
 
@@ -12,14 +12,14 @@ Presentation companion website for an 18-number class roster, exploring innovati
 
 ## Teams
 
-The nine timeline topics are arranged into four teams. Student numbers 1–17 are randomly assigned once to balanced teams of four or five; student 18 is excluded. Entering the same number again—on the same or another phone—always returns the same team. The page shows team totals, not names.
+The nine timeline topics are arranged into four teams. Student numbers 1–28 are randomly assigned once to balanced teams of six or seven; student 18 is excluded. Entering the same number again—on the same or another phone—always returns the same team. The page shows team totals, not names.
 
 | Team | Topics | Students |
 |---|---|---:|
-| 1 | Agriculture; Nuclear Fission | 5 |
-| 2 | Steam Engine; Transistor; Recombinant DNA | 4 |
-| 3 | Printing Press; World Wide Web | 4 |
-| 4 | Mastery of Fire; Artificial Intelligence | 4 |
+| 1 | Agriculture; Nuclear Fission | 7 |
+| 2 | Steam Engine; Transistor; Recombinant DNA | 7 |
+| 3 | Printing Press; World Wide Web | 7 |
+| 4 | Mastery of Fire; Artificial Intelligence | 6 |
 
 This works as a static GitHub Pages site, so no database or backend setup is required.
 
@@ -33,7 +33,7 @@ This works as a static GitHub Pages site, so no database or backend setup is req
 
 ## Edit and preview
 
-Edit `index.html` to change the timeline or page content. The `teamTopics` array determines the innovation topics, and `studentTeamByNumber` holds the fixed student-to-team mapping. If you change the mapping, assign each number from 1–17 exactly once, leave 18 unassigned, and keep each team at four or five students.
+Edit `index.html` to change the timeline or page content. The `teamTopics` array determines the innovation topics, and `studentTeamByNumber` holds the fixed student-to-team mapping. If you change the mapping, assign every number from 1–28 except 18 exactly once, and keep each team at six or seven students.
 
 Run a local HTTP server to preview the page, or open `index.html` directly in a browser.
 
